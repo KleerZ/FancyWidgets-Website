@@ -1,0 +1,51 @@
+<div #sidebar class="fancy-sidebar" [ngClass]="{'show': showSidebar}">
+  <div class="mb-3">
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             [routerLink]="'/docs/welcome'"
+             value="welcome" name="sidebar" [checked]="true"/>
+      <span class="button-label">Welcome</span>
+    </label>
+  </div>
+
+  <span class="docs-title">DOCUMENTATION</span>
+
+  <div class="d-flex gap-2 mt-2 flex-column">
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="getting started" name="sidebar" [routerLink]="'/docs/getting-started'" />
+      <span class="button-label">Getting started</span>
+    </label>
+
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="context menu" name="sidebar" [routerLink]="'/docs/context-menu'" />
+      <span class="button-label">Context menu</span>
+    </label>
+
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="settings" name="sidebar" [routerLink]="'/docs/settings'" />
+      <span class="button-label">Settings</span>
+    </label>
+
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="components" name="sidebar" [routerLink]="'/docs/components'" />
+      <span class="button-label">Components</span>
+    </label>
+
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="settingsProvider" name="sidebar" [routerLink]="'/docs/settings-provider'"/>
+      <span class="button-label">Settings Provider</span>
+    </label>
+
+    <label class="fancy-sidebar-button">
+      <input type="radio"
+             value="di" name="sidebar" [routerLink]="'/docs/dependency-injection'" />
+      <span class="button-label">Dependency Injection (DI)</span>
+    </label>
+  </div>
+
+</div>

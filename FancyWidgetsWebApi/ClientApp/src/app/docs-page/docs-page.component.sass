@@ -1,0 +1,44 @@
+@import "src/colors"
+
+.docs-section
+  display: flex
+  flex-direction: row
+  background: black
+  min-height: calc(100vh - 55px)
+  height: auto
+  width: 100%
+
+  .sidebar-container
+    z-index: 100
+    min-width: 300px
+    min-height: calc(100vh - 55px)
+
+    @media screen and (max-width: 768px)
+      min-width: auto
+
+  ::ng-deep code
+    color: #3ac9b0
+
+  .markdown-page
+    padding: 10px 25px 0 25px
+    color: white
+    height: auto
+    overflow-y: auto
+
+    @media screen and (max-width: 768px)
+      height: calc(100vh - 55px - 40px)
+
+
+.sidebar-btn
+  visibility: hidden
+
+  button
+    width: 100%
+    height: 40px
+    position: fixed
+    bottom: 0
+    border-radius: 0
+    z-index: 100
+
+  @media screen and (max-width: 768px)
+    visibility: visible

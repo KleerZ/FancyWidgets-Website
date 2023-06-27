@@ -1,0 +1,99 @@
+@import "src/styles"
+
+.main-section
+  height: calc(100vh - 55px)
+  background: url("/assets/main-bg.webp")
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  border: none
+
+  p
+    color: darkgrey
+    font-size: 14px
+
+.features-section
+  min-height: calc(100vh - 55px)
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: #000000
+  border: none
+
+.docs-section
+  min-height: calc(100vh - 55px)
+  background: url("/assets/color-bkg.webp")
+  background-position: center
+  background-size: cover
+  background-repeat: no-repeat
+  border: none
+
+  img
+    width: 100%
+
+.title
+  font-size: 50px
+  color: white
+  font-family: "Inter Bold", serif
+
+.tip
+  font-size: 18px
+  width: 100%
+  text-align: center
+  font-weight: bolder
+  bottom: 0
+  color: #888888
+  margin-top: 20px
+
+.docs-button
+  @extend .rounded-button
+  height: 45px
+  width: 240px
+  background: #FFD027
+  font-family: "Inter Medium", serif
+  color: black
+
+  &:hover
+    background: orange
+
+.fancy-card
+  background: $accent-gray
+  height: auto
+  padding: 20px
+  border-radius: 12px
+
+  img
+    width: 100%
+    height: auto
+
+  .img-background
+    @extend .fancy-card
+    display: flex
+    justify-content: center
+    align-items: center
+
+  .customization
+    color: $juice-yellow
+    font-family: "Inter Bold", serif
+
+  .excellent-performance
+    font-family: "Inter Bold", serif
+    color: #E022FF
+
+  .native-experience
+    font-family: "Inter Bold", serif
+    color: $light-green
+
+  .windows-supported
+    font-family: "Inter Bold", serif
+    color: #0094FF
+
+  .windows-supported-img
+    max-width: 225px
+    height: auto
+
+.create-widgets
+  color: #FFCA0D
+  font-family: "Inter Bold", serif
+
+

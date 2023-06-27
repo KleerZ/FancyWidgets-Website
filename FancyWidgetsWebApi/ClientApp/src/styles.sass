@@ -1,0 +1,82 @@
+@import "colors"
+
+@font-face
+  font-family: 'Inter Default'
+  src: url('assets/fonts/Inter-Regular.ttf') format('truetype')
+
+@font-face
+  font-family: 'Inter Medium'
+  src: url('assets/fonts/Inter-Medium.ttf') format('truetype')
+
+@font-face
+  font-family: 'Inter Bold'
+  src: url('assets/fonts/Inter-Bold.ttf') format('truetype')
+
+@font-face
+  font-family: 'Inter SemiBold'
+  src: url('assets/fonts/Inter-SemiBold.ttf') format('truetype')
+
+body
+  font-family: 'Inter Default', serif
+  scroll-behavior: smooth
+
+.fancy-button
+  background: $secondary-gray
+  border-radius: 8px
+  color: white
+  text-align: center
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &:hover
+    background: white
+    color: black
+
+  &:focus
+    color: white
+    background: $secondary-gray
+
+.support-project-button
+  @extend .fancy-button
+  display: flex
+  justify-content: center
+  align-items: center
+  border: solid 2px transparent
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(90deg, #0dffd3, #0d99ff)
+  background-origin: border-box
+  background-clip: content-box, border-box, text
+  box-shadow: 1px 1000px 1px black inset
+  color: transparent
+  transition: all 0.2s ease-in-out
+  font-family: "Inter Default", serif
+
+  &:hover
+    background: rgb(13,255,211)
+    background: linear-gradient(90deg, rgba(13,255,211,1) 0%, rgba(13,153,255,1) 100%)
+    border: solid 2px black
+    transition: all 0.2s ease-in-out
+    box-shadow: none
+
+    span
+      width: 100%
+      color: black
+
+  span
+    width: fit-content
+    background: rgb(13,255,211)
+    background: linear-gradient(90deg, rgba(13,255,211,1) 0%, rgba(13,153,255,1) 100%)
+    color: transparent
+    background-clip: text
+    font-family: "Inter Medium", serif
+
+.rounded-button
+  @extend .fancy-button
+  border-radius: 100px
+
+.background-dark
+  min-height: calc(100vh - 55px)
+  padding: 20px 0 20px 0
+  border: none
+  width: 100%
+  background: rgba(0, 0, 0, 0.7)

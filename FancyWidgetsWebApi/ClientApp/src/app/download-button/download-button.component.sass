@@ -1,0 +1,17 @@
+@import "src/colors"
+@import "src/styles"
+
+.download-button
+  @extend .rounded-button
+  height: 45px
+  width: 240px
+  background: $light-green
+  font-weight: bold
+  color: black
+
+  &:hover
+    background: #00c251
+
+  &:focus
+    background: $light-green
+    color: black

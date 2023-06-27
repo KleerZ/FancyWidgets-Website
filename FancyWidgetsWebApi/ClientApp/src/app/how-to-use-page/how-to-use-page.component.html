@@ -1,0 +1,56 @@
+<section class="how-to-use d-flex flex-column align-items-center">
+  <span class="title mb-2">How to use?</span>
+  <div class="container-sm">
+
+    <div class="tip-card d-flex flex-row justify-content-between row row-gap-3 m-0 mb-2">
+      <div class="d-flex flex-column col-lg-10">
+        <span class="tip-card-title">Step 1 - Download app</span>
+        <span class="tip-card-description">Just click “Download”.</span>
+      </div>
+      <div class="d-flex justify-content-center align-items-center col-lg-2">
+        <app-download-button/>
+      </div>
+    </div>
+
+    <div class="tip-card d-flex flex-row justify-content-between row m-0 mb-2">
+      <div class="d-flex flex-column">
+        <span class="tip-card-title">Step 2 - Install app</span>
+        <span class="tip-card-description">Install our app on your pc</span>
+      </div>
+    </div>
+
+    <div class="tip-card d-flex flex-row justify-content-between row m-0 mb-2">
+      <div class="d-flex flex-column">
+        <span class="tip-card-title">Step 3 - Add Widgets to the special folder</span>
+        <div class="tip-card-description mb-3">
+          Just download the widgets you like from our <a [routerLink]="['/widgets']">widgets page</a>
+          or from any source
+          (we are not responsible for other sources).
+        </div>
+        <div class="tip-card-description">
+          Unzip the archive along the path:
+          <span class="path">C:\Users\USERNAME\Documents\Widgets</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-card d-flex flex-row justify-content-between row m-0 mb-2">
+      <div class="d-flex flex-column">
+        <span class="tip-card-title">Step 4 - Launch our app</span>
+        <span class="tip-card-description">
+          Launch our application from the icon called "Fancy Widgets" in the start menu.
+        </span>
+      </div>
+    </div>
+
+    <div class="tip-card d-flex flex-row justify-content-between">
+      <div class="d-flex flex-column">
+        <span class="tip-card-title">Step 5 - Launch widget</span>
+        <span class="tip-card-description">
+          Launch the desired widget by clicking on the "Enable" button in the widget card
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>

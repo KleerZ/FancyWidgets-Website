@@ -1,0 +1,45 @@
+@import "src/colors"
+
+.how-to-use
+  background: black
+  padding: 0 0 20px 0
+  min-height: calc(100vh - 55px - 55px)
+
+  a
+    color: $juice-yellow
+
+  .title
+    font-size: 50px
+    font-weight: bolder
+    color: $juice-yellow
+    font-family: "Inter Bold", serif
+
+  .tip-card
+    width: 100%
+    background: $accent-gray
+    border-radius: 8px
+    padding: 20px
+
+    ::ng-deep app-download-button .download-button
+      width: 150px !important
+      height: 40px !important
+      font-weight: normal
+      font-family: "Inter Medium", serif
+
+    .tip-card-title
+      color: white
+      font-size: 20px
+      font-family: "Inter Medium", serif
+      margin-bottom: 10px
+
+    .tip-card-description
+      color: gray
+      font-size: 14px
+
+      .path
+        color: #e0e0e0
+
+  .rounded-btn
+    border-radius: 100px
+
+

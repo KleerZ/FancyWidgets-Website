@@ -1,0 +1,34 @@
+@import "src/colors"
+
+nav
+  background: black !important
+  height: 55px
+  width: 100%
+  top: 0
+  z-index: 300 !important
+
+  .fancy-link
+    position: relative
+    color: #BEBEBE
+
+    &:hover
+      color: white
+
+    &::before
+      content: ""
+      position: absolute
+      width: 100%
+      height: 2px
+      bottom: 0
+      left: 0
+      background-color: white
+      visibility: hidden
+      transform: scaleX(0)
+      transition: all 0.3s ease-in-out
+
+    &:hover::before
+      visibility: visible
+      transform: scaleX(1)
+
+
+
