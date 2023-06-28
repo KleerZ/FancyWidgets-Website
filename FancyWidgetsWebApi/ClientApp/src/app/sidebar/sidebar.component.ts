@@ -1,12 +1,9 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   Input,
-  Output,
-  Renderer2,
-  ViewChild
 } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -17,6 +14,7 @@ export class SidebarComponent {
   @Input()
   public showSidebar: boolean = false
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private router: Router) {
 
+  }
 }

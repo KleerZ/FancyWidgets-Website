@@ -1,6 +1,6 @@
-import {Component, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Docs} from "../../docs/docs";
-import {ActivatedRoute, Router, UrlSegment} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from "@angular/router";
 
 @Component({
   selector: 'app-docs-page',
@@ -13,8 +13,6 @@ export class DocsPageComponent {
   protected readonly Docs = Docs;
   showSidebar = true;
   markdownText: string = Docs.welcome;
-
-  @ViewChild('markdown') markdown!: HTMLElement
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     activatedRoute.url.subscribe(url => {
