@@ -1,56 +1,77 @@
 <section class="main-section scroll-section d-flex justify-content-center align-items-center">
-  <div class="background-dark d-flex justify-content-center h-100 align-items-center flex-column">
+  <div class="d-flex justify-content-center h-100 align-items-center flex-column">
     <div class="d-flex flex-column align-items-center ">
-      <h1 class="fw-bold title mb-4">Fancy Widgets</h1>
+      <span class="fw-bold title mb-2">Fancy Widgets</span>
       <app-download-button class="mb-3"></app-download-button>
       <p>For Windows 10/11 64-bit</p>
     </div>
   </div>
 </section>
 
-<section class="features-section scroll-section d-flex justify-content-center align-items-center ">
-  <div class="background-dark d-flex justify-content-center h-100 align-items-center ">
-    <div class="container-sm px-4">
-      <div class="row mb-3 gap-3 d-flex justify-content-center">
+<section class="features-section scroll-section h-100">
+  <div class="container-sm">
+    <div class="row">
 
-        <div class="col-lg-5 fancy-card">
-          <h3 class="fw-bold customization mb-3">Customization</h3>
-          <p class="fw-medium text-white fs-6">
+      <div class="col-lg-6">
+        <div class="fancy-card">
+          <h4 class="fancy-card-title mb-3">Customization</h4>
+          <h1 class="fw-bold fancy-card-title-main text-white mb-3">
+            Customize your desktop with ease and style
+          </h1>
+          <p class="fw-medium fancy-card-description fs-5">
             Сustomize widgets to your own style! With customization you can:
             сhange sizes, colors, fonts, borders, padding and other widget options.
           </p>
           <div class="img-background">
-            <img ngSrc="assets/widget-editing-example.png" alt="" height="378" width="861">
+            <img src="assets/widget-editing-example.png" >
           </div>
         </div>
-
-        <div class="col-lg-5 fancy-card">
-          <h3 class="fw-bold native-experience mb-3">Native widget experience</h3>
-          <span class="fw-medium text-white fs-6">
-            Our widgets are not just a decoration for your site, but full-fledged applications that run on the Windows desktop.<p>
-          </span>
-          <span class="fw-medium text-white fs-6">
-             Our widgets feel native because they integrate with the system and don't get in the way of your work.
-             They don't disappear when you press Win+D, they don't take up space in Alt+Tab, and they don't overlap
-             other windows.<p>
-          </span>
-          <span class="fw-medium text-white fs-6">
-             Our widgets are a stylish and convenient way to get the right information on your desktop.
-          </span>
-        </div>
-
       </div>
 
-      <div class="row gap-3 d-flex justify-content-center">
-        <div class="col-lg-5 fancy-card">
-          <h3 class="fw-bold excellent-performance mb-3">Excellent performance</h3>
-          <p class="fw-medium text-white fs-6">
+      <div class="col-lg-6">
+        <div class="fancy-card">
+          <h4 class="fancy-card-title mb-3">Native widget experience</h4>
+          <h1 class="fw-bold fancy-card-title-main text-white mb-3">
+            Natural and nice user experience
+          </h1>
+          <p class="fw-medium fancy-card-description fs-5">
+            Our widgets are not just a decoration for your site, but full-fledged applications that run on the Windows
+            desktop.
+          <p>
+          </p>
+          <p class="fw-medium fancy-card-description fs-5">
+            Our widgets feel native because they integrate with the system and don't get in the way of your work.
+            They don't disappear when you press Win+D, they don't take up space in Alt+Tab, and they don't overlap
+            other windows.
+          <p>
+          </p>
+          <p class="fw-medium fancy-card-description fs-5">
+            Our widgets are a stylish and convenient way to get the right information on your desktop.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="fancy-card">
+          <h4 class="fancy-card-title mb-3">Excellent performance</h4>
+          <h3 class="fw-bold fancy-card-title-main text-white mb-3">
+            Use widgets without compromising performance
+          </h3>
+          <p class="fw-medium fancy-card-description fs-5">
             Our widgets are very efficient in using your computer's RAM and CPU.
           </p>
         </div>
+      </div>
 
-        <div class="col-lg-5 fancy-card">
-          <h3 class="fw-bold windows-supported mb-4">Support for the most popular OS</h3>
+      <div class="col-lg-6 ">
+        <div class="fancy-card">
+          <h4 class="fancy-card-title mb-3">Support for the most popular OS</h4>
+          <h3 class="fw-bold fancy-card-title-main text-white mb-3">
+            Our widgets work on your favorite Windows
+          </h3>
           <div class="d-flex justify-content-center align-items-center flex-row row">
             <div class="row d-flex justify-content-center align-items-center gap-5">
               <img class="windows-supported-img col-6" src="assets/win10logo.webp">
@@ -59,25 +80,27 @@
           </div>
         </div>
       </div>
-
     </div>
+
   </div>
 </section>
 
-<section class="docs-section scroll-section d-flex justify-content-center align-items-center">
-  <div class="background-dark d-flex justify-content-center h-100 align-items-center flex-column">
-    <div class="container-sm d-flex row">
-      <div class="col-lg-7">
-        <h1 class="fw-bold title mb-4 create-widgets">Do you want to create your own widgets for your desktop?</h1>
-        <p class="fs-5 text-white mb-4">We provide such an opportunity! Our platform is open to creating widgets with any possibilities
+<section class="docs-section d-flex ">
+  <div class="container-sm docs-container h-100">
+    <div class="fancy-card d-flex justify-content-center">
+      <div class="d-flex fancy-card-container flex-column align-items-center">
+        <h1 class="fw-bold fancy-card-title-main text-white mb-3 text-center">
+          Do you want to create your own widgets for your desktop?
+        </h1>
+        <p class="fw-medium fancy-card-description fs-5 text-center">
+          We provide such an opportunity! Our platform is open to creating widgets with
+          any possibilities
           - you are only limited by your imagination.
-          Our widgets based on C#, XAML and AvaloniaUI framework</p>
-        <a class="btn docs-button mb-3" [routerLink]="['/docs']">See documentation</a>
-      </div>
-      <div class="col-lg-5 d-flex justify-content-center align-items-center">
-        <img src="assets/technologies.png" alt="">
+          Our widgets based on C#, XAML and AvaloniaUI framework
+        <p>
+          <a class="btn fancy-button docs-button" [routerLink]="['/docs']">See documentation</a>
       </div>
     </div>
-
   </div>
+
 </section>

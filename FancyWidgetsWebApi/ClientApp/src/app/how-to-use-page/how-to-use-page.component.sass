@@ -1,7 +1,6 @@
 @import "src/colors"
 
 .how-to-use
-  background: black
   padding: 0 0 20px 0
   min-height: calc(100vh - 55px - 55px)
 
@@ -9,14 +8,16 @@
     color: $juice-yellow
 
   .title
-    font-size: 50px
+    font-size: 3vmax
+    color: white
     font-weight: bolder
-    color: $juice-yellow
+    line-height: 1.2em
+    margin-top: 10px
     font-family: "Inter Bold", serif
 
   .tip-card
     width: 100%
-    background: $accent-gray
+    background: $secondary-main-color
     border-radius: 8px
     padding: 20px
 
@@ -33,13 +34,13 @@
       margin-bottom: 10px
 
     .tip-card-description
-      color: gray
+      color: $secondary-text-gray
       font-size: 14px
 
       .path
         color: #e0e0e0
 
-  .rounded-btn
-    border-radius: 100px
+:host(::ng-deep .download-button)
+  border-radius: 100px !important
 
 

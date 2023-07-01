@@ -1,32 +1,45 @@
 @import "src/styles"
 
+html
+  background: $main-color
+
 .main-section
   height: calc(100vh - 55px)
-  background: url("/assets/main-bg.webp")
   background-position: center
   background-size: cover
   background-repeat: no-repeat
   border: none
+
+  span
+    font-size: 5vmax
 
   p
     color: darkgrey
     font-size: 14px
 
 .features-section
-  min-height: calc(100vh - 55px)
-  display: flex
-  justify-content: center
-  align-items: center
-  background-color: #000000
+  min-height: calc(100vh)
   border: none
 
 .docs-section
-  min-height: calc(100vh - 55px)
-  background: url("/assets/color-bkg.webp")
-  background-position: center
-  background-size: cover
-  background-repeat: no-repeat
-  border: none
+  height: auto
+  display: flex
+  justify-content: center
+  align-content: center
+
+  .docs-container
+    padding: 10px
+
+    .fancy-card
+      background-image: url("/assets/docs-section-bg.png")
+      background-origin: border-box
+      background-position: center
+      background-size: cover
+      position: relative
+
+      a
+        //background: #0711a4
+        border: 2px solid #a6aeff
 
   img
     width: 100%
@@ -46,21 +59,32 @@
   margin-top: 20px
 
 .docs-button
-  @extend .rounded-button
-  height: 45px
-  width: 240px
-  background: #FFD027
-  font-family: "Inter Medium", serif
-  color: black
-
-  &:hover
-    background: orange
+  height: 55px
+  font-size: 17px
+  width: 200px
 
 .fancy-card
-  background: $accent-gray
-  height: auto
-  padding: 20px
-  border-radius: 12px
+  background: $secondary-main-color
+  height: 100%
+  width: 100%
+  padding: 55px
+  border-radius: 15px
+
+  .fancy-card-container
+    @media screen and (min-width: 768px)
+      width: 50%
+
+  .fancy-card-title
+    color: $juice-purple-hover
+    font-family: "Inter Medium", serif
+
+  .fancy-card-title-main
+    color: white
+    font-family: "Inter Bold", serif
+
+  .fancy-card-description
+    color: $secondary-text-gray
+    font-family: "Inter Default", serif
 
   img
     width: 100%
@@ -69,31 +93,23 @@
   .img-background
     @extend .fancy-card
     display: flex
+    height: auto
+    width: 100%
     justify-content: center
     align-items: center
-
-  .customization
-    color: $juice-yellow
-    font-family: "Inter Bold", serif
-
-  .excellent-performance
-    font-family: "Inter Bold", serif
-    color: #E022FF
-
-  .native-experience
-    font-family: "Inter Bold", serif
-    color: $light-green
 
   .windows-supported
     font-family: "Inter Bold", serif
     color: #0094FF
 
   .windows-supported-img
-    max-width: 225px
+    max-width: 235px
     height: auto
 
 .create-widgets
   color: #FFCA0D
   font-family: "Inter Bold", serif
 
+.col-lg-6
+  padding: 10px
 

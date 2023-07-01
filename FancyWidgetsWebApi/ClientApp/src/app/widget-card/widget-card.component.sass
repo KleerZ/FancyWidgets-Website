@@ -4,15 +4,17 @@
   min-width: 280px
   max-width: 280px
   min-height: 420px
-  max-height: 420px
-  background: $accent-gray
-  border-radius: 8px
+  //max-height: 420px
+  height: auto
+  background: $secondary-main-color
+  border-radius: 12px
   padding: 12px
 
   ::ng-deep .download-button
     font-family: "Inter Medium", serif
     font-weight: normal
     border-radius: 8px
+    height: 45px
     width: 100%
 
   .title
@@ -25,7 +27,7 @@
     text-overflow: ellipsis
 
   .description
-    color: gray
+    color: $secondary-text-gray
     font-size: 14px
     display: -webkit-box
     -webkit-line-clamp: 2
@@ -35,7 +37,7 @@
 
   .img-background
     width: 100%
-    background: $secondary-gray
+    background: #19212d
     border-radius: 8px
     max-height: 255px
     min-height: 255px
