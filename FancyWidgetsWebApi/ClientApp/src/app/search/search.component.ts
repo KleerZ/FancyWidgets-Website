@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, Input, Output, ViewChild, ViewContainerRef} from '@angular/core';
 import {marked} from "marked";
 import {Docs} from "../../docs/docs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -15,15 +15,13 @@ export class SearchComponent {
   searchQuery: string = ""
   searchResults: any[] = []
 
-  constructor(private router: Router, private route: ActivatedRoute,) {
-  }
-
   search() {
     if (this.searchQuery === "") {
       this.searchResults = []
     }
 
     this.searchResults = []
+
     this.searchInMarkdown(Docs.gettingStarted, '/docs/getting-started', 'Getting Started')
     this.searchInMarkdown(Docs.contextMenu, '/docs/context-menu', "Context Menu")
     this.searchInMarkdown(Docs.settings, '/docs/settings', 'Settings')
@@ -50,20 +48,5 @@ export class SearchComponent {
         )
       }
     }
-  }
-
-  toggleSearchPanel(event?: MouseEvent) {
-    let modalContainer = document.querySelector('.search-container')
-    let input = document.querySelector('#search-container-input')
-    let noResults = document.querySelector('.no-results')
-    let clearBtn = document.querySelector('#clear-btn')
-    if (event && event.target === modalContainer ||
-      event?.target === input || event?.target === noResults || event?.target === clearBtn) {
-      return
-    }
-    this.showSearchPanel = !this.showSearchPanel
-
-    if (this.searchQuery !== '')
-      this.search()
   }
 }

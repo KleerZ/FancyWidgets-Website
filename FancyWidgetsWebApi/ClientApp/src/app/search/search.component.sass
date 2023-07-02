@@ -1,80 +1,54 @@
 @import "src/colors"
 
-:host(::ng-deep .form-control)
-  position: relative
-  background: #000000 !important
-  border: 1px solid #2d2d2d
-  color: white !important
 
-:host(::ng-deep .navbar-control)
-  @media screen and (max-width: 768px)
-    display: none
+.search-container
+  background: #131a2c !important
+  padding: 10px 10px 10px 10px
+  border-radius: 12px !important
 
-:host(::ng-deep .form-control::placeholder)
-  color: gray
-
-.search-panel
-  display: flex
-  justify-content: center
-  align-items: center
-  position: absolute
-  top: 0
-  left: 0
-  width: 100% !important
-  height: 100vh !important
-  padding: 10px
-  background: rgba(0,0,0, .8)
-
-  .search-container
-    background: $main-color
+  .no-results
+    color: $light-grey
+    font-size: 15px
     padding: 10px 10px 0 10px
-    border-radius: 12px !important
 
-    .no-results
-      color: $light-grey
-      font-size: 15px
-      padding: 10px
+  .results
+    width: 100%
+    max-height: 400px
+    overflow-y: auto
+    overflow-x: hidden
 
-    .results
+    .search-result
+      margin-top: 10px
+      display: flex
+      flex-direction: column
+      justify-content: center
+      border-radius: 12px
       width: 100%
-      max-height: 400px
-      overflow-y: auto
-      padding-bottom: 10px
-      overflow-x: hidden
+      height: auto
+      padding: 10px !important
+      background: $darker-main-color
 
-      .search-result
-        margin-top: 10px
-        display: flex
-        flex-direction: column
-        justify-content: center
-        border-radius: 12px
-        width: 100%
-        height: auto
-        padding: 10px !important
-        background: $darker-main-color
+      &:hover
+        background: $secondary-main-color
+        cursor: pointer
 
-        &:hover
-          background: $secondary-main-color
-          cursor: pointer
+      .title
+        color: $light-grey
+        font-size: 13px
+        margin: 0
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
 
-        .title
-          color: $light-grey
-          font-size: 13px
-          margin: 0
-          white-space: nowrap
-          overflow: hidden
-          text-overflow: ellipsis
+      .text
+        color: white !important
+        font-family: "Inter Medium", serif
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
 
-        .text
-          color: white !important
-          font-family: "Inter Medium", serif
-          white-space: nowrap
-          overflow: hidden
-          text-overflow: ellipsis
-
-
-    @media screen and (max-width: 768px)
-      width: 100%
+  @media screen and (max-width: 768px)
+    width: 100%
 
 :host(::ng-deep p)
   color: white !important

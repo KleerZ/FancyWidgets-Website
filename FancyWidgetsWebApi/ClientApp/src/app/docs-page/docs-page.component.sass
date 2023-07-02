@@ -51,4 +51,22 @@
   color: yellow !important
   font-family: "Inter Bold", serif !important
 
+:host(::ng-deep .form-control)
+  position: relative
+  background: #000000 !important
+  border: 1px solid #2d2d2d
+  color: white !important
 
+:host(::ng-deep .navbar-control)
+  @media screen and (max-width: 768px)
+    display: none
+
+:host(::ng-deep .form-control::placeholder)
+  color: gray
+
+#search-btn
+  border-radius: 8px
+  font-family: "Inter Default",serif
+  font-weight: normal
+  height: 40px
+  width: 40px

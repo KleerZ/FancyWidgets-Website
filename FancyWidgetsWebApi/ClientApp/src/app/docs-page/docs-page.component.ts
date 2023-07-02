@@ -35,6 +35,9 @@ export class DocsPageComponent implements AfterContentInit {
   }
 
   changeMarkdownByUrl(url: UrlSegment[]) {
+    if (!url[1])
+      return
+
     if (url[1].path.split('?')[0] === 'welcome' || url[1].path === 'welcome')
       this.markdownText = Docs.welcome
     if (url[1].path.split('?')[0] === 'getting-started' || url[1].path === 'getting-started')
@@ -52,6 +55,7 @@ export class DocsPageComponent implements AfterContentInit {
 
     this.searchQuery = ''
     this.searchQuery2 = ''
+
   }
 
   highlightFoundedText() {
@@ -79,7 +83,6 @@ export class DocsPageComponent implements AfterContentInit {
       highlightedElement.classList.remove('highlighted');
     });
   }
-
 
   processCodeElement(element: HTMLElement) {
     const searchQuery = this.searchQuery.toLowerCase();
@@ -132,11 +135,13 @@ export class DocsPageComponent implements AfterContentInit {
     this.activatedRoute.url.subscribe(url => {
       this.changeMarkdownByUrl(url)
 
+      if (!url[1])
+        return
+
       if (url[1].path.includes('?search=')) {
         this.searchQuery = url[1].path.split('?search=')[1].split('&')[0]
         this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
       }
-
       this.highlightFoundedText()
     })
   }

@@ -64,10 +64,11 @@ html
   width: 200px
 
 .fancy-card
+  position: relative
   background: $secondary-main-color
   height: 100%
   width: 100%
-  padding: 55px
+  padding: 45px
   border-radius: 15px
 
   .fancy-card-container
@@ -92,11 +93,16 @@ html
 
   .img-background
     @extend .fancy-card
+    position: relative
     display: flex
-    height: auto
-    width: 100%
+    max-width: 100%
+    padding: 0
     justify-content: center
     align-items: center
+
+    img
+      min-width: 100% !important
+      height: auto !important
 
   .windows-supported
     font-family: "Inter Bold", serif
