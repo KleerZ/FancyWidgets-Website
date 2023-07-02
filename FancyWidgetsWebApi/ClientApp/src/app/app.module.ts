@@ -17,6 +17,7 @@ import {SupportPageComponent} from "./support-page/support-page.component";
 import {DownloadButtonComponent} from "./download-button/download-button.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {DocsPageComponent} from "./docs-page/docs-page.component";
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {DocsPageComponent} from "./docs-page/docs-page.component";
     SupportPageComponent,
     DownloadButtonComponent,
     SidebarComponent,
-    DocsPageComponent
+    DocsPageComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

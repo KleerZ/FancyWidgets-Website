@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: "support", component: SupportPageComponent, pathMatch: "full", title: "Fancy Widgets - Support"},
   {path: "docs", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
   {path: "docs/:page", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
+  {path: "docs/:page/:search", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
 ];
 
 @NgModule({

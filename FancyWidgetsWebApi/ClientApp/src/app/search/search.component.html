@@ -1,0 +1,32 @@
+<div class="d-flex flex-row gap-1" (click)="toggleSearchPanel()">
+  <input (input)="search()" [(ngModel)]="searchQuery" value="{{searchQuery}}" type="text" class="form-control navbar-control"
+         placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <button class="btn btn-secondary" type="button" id="button-addon2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+    </svg>
+  </button>
+</div>
+
+
+<div *ngIf="showSearchPanel" (click)="toggleSearchPanel($event)" class="search-panel">
+  <div class="search-container col-6">
+    <div class="d-flex flex-row gap-2 mb-2">
+      <input id="search-container-input" class="form-control"
+             placeholder="Search" type="text" (input)="search()"
+             [(ngModel)]="searchQuery" value="{{searchQuery}}">
+      <button class="btn btn-outline-secondary" type="button" (click)="toggleSearchPanel()">
+        Cancel
+      </button>
+    </div>
+    <div class="no-results" *ngIf="searchResults.length === 0 && searchQuery">
+      No results found
+    </div>
+    <div class="results" *ngIf="searchQuery !== ''">
+      <div class="search-result mb-1 w-100" *ngFor="let result of searchResults" [routerLink]="[result.url]">
+        <span class="title">{{result.title}}</span>
+        <span class="text">{{result.text}}</span>
+      </div>
+    </div>
+  </div>
+</div>
