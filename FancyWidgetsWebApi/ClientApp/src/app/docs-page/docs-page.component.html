@@ -15,8 +15,8 @@
                  [showSidebar]="showSidebar"/>
   </div>
 
-  <div #markdown class="markdown-page">
-    <markdown [data]="markdownText"/>
+  <div class="markdown-page">
+    <markdown (ready)="highlightFoundedText()" [disableSanitizer]="true" #markdown [data]="markdownText" ></markdown>
   </div>
 </section>
 

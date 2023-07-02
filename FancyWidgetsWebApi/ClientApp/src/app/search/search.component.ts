@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {marked} from "marked";
 import {Docs} from "../../docs/docs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -15,11 +15,14 @@ export class SearchComponent {
   searchQuery: string = ""
   searchResults: any[] = []
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute,) {
+  }
 
-  search(){
-    if (this.searchQuery === "")
+  search() {
+    if (this.searchQuery === "") {
       this.searchResults = []
+    }
+
     this.searchResults = []
     this.searchInMarkdown(Docs.gettingStarted, '/docs/getting-started', 'Getting Started')
     this.searchInMarkdown(Docs.contextMenu, '/docs/context-menu', "Context Menu")
@@ -29,15 +32,18 @@ export class SearchComponent {
     this.searchInMarkdown(Docs.di, '/docs/dependency-injection', "Dependency Injection")
   }
 
-  searchInMarkdown(markdown: string, url: string, title: string){
+  clearSearchInput() {
+    this.searchQuery = ''
+  }
 
+  searchInMarkdown(markdown: string, url: string, title: string) {
     const regex = /<code>(.*?)<\/code>/gs;
     let match;
 
     while ((match = regex.exec(marked.parse(markdown))) !== null) {
       const codeText = match[1];
       if (codeText.toLowerCase().includes(this.searchQuery.toLowerCase())) {
-        const searchResult = { text: codeText, url: `${url}?search=${this.searchQuery}`, title:  title};
+        const searchResult = {text: codeText, url: `${url}?search=${this.searchQuery}&${codeText}`, title: title};
         this.searchResults.push(searchResult);
         this.searchResults = this.searchResults.filter((result, index, self) =>
           index === self.findIndex((r) => r.title === result.title)
@@ -46,11 +52,13 @@ export class SearchComponent {
     }
   }
 
-  toggleSearchPanel(event?: MouseEvent){
+  toggleSearchPanel(event?: MouseEvent) {
     let modalContainer = document.querySelector('.search-container')
     let input = document.querySelector('#search-container-input')
     let noResults = document.querySelector('.no-results')
-    if (event && event.target === modalContainer || event?.target === input || event?.target === noResults) {
+    let clearBtn = document.querySelector('#clear-btn')
+    if (event && event.target === modalContainer ||
+      event?.target === input || event?.target === noResults || event?.target === clearBtn) {
       return
     }
     this.showSearchPanel = !this.showSearchPanel

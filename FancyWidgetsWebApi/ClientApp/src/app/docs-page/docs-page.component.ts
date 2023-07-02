@@ -1,40 +1,33 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   Component,
-  ElementRef,
-  OnChanges,
-  OnInit, QueryList,
-  SimpleChanges,
-  ViewChild, ViewChildren,
-  ViewEncapsulation
+  ElementRef, ViewChild
 } from '@angular/core';
 import {Docs} from "../../docs/docs";
-import {ActivatedRoute, NavigationEnd, Router, UrlSegment} from "@angular/router";
-import {MarkdownComponent} from "ngx-markdown";
-
+import {ActivatedRoute, UrlSegment} from "@angular/router";
+import {MarkdownService} from "ngx-markdown";
 
 @Component({
   selector: 'app-docs-page',
   templateUrl: './docs-page.component.html',
   styleUrls: ['./docs-page.component.sass']
 })
-export class DocsPageComponent implements AfterViewInit, OnChanges{
+export class DocsPageComponent implements AfterContentInit {
 
   protected readonly Docs = Docs;
   showSidebar = true;
   markdownText: string = Docs.welcome;
 
-  @ViewChild('markdown', {static: true}) markdownElement!: ElementRef;
-  @ViewChildren(MarkdownComponent) anotherComponents!: QueryList<MarkdownComponent>;
+  @ViewChild('markdown', {static: true, read: ElementRef}) markdownElement!: ElementRef<HTMLElement>;
 
   searchQuery: string = ""
+  searchQuery2: string = ""
   searchResults: any[] = []
+  currentUrl: string = ''
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    activatedRoute.url.subscribe(url => {
-      this.changeMarkdownByUrl(url)
-      this.highlightFoundedText(url)
-    })
+  constructor(private activatedRoute: ActivatedRoute, private markdownService: MarkdownService) {
+    if (window.innerWidth < 768)
+      this.showSidebar = false
   }
 
   toggleSidebar() {
@@ -42,7 +35,6 @@ export class DocsPageComponent implements AfterViewInit, OnChanges{
   }
 
   changeMarkdownByUrl(url: UrlSegment[]) {
-    this.highlightFoundedText(url)
     if (url[1].path.split('?')[0] === 'welcome' || url[1].path === 'welcome')
       this.markdownText = Docs.welcome
     if (url[1].path.split('?')[0] === 'getting-started' || url[1].path === 'getting-started')
@@ -57,40 +49,95 @@ export class DocsPageComponent implements AfterViewInit, OnChanges{
       this.markdownText = Docs.settingsProvider
     if (url[1].path.split('?')[0] === 'dependency-injection' || url[1].path === 'dependency-injection')
       this.markdownText = Docs.di
+
+    this.searchQuery = ''
+    this.searchQuery2 = ''
   }
 
-  highlightFoundedText(url: UrlSegment[]) {
-    let element = document.querySelector('markdown');
-    let text = url[1].path.split('?search=')[1]
-
-    element!.querySelectorAll('pre code').forEach((value, key) => {
-      value.classList.add('highlighted')
+  highlightFoundedText() {
+    if (!this.searchQuery && !this.searchQuery2)
+      return
+    const codeElements = this.markdownElement
+      .nativeElement.querySelectorAll('code');
+    codeElements.forEach((value, key) => {
+      this.resetHighlighting(value);
     })
 
-    element!.querySelectorAll('code').forEach((value, key) => {
-      value.classList.add('highlighted')
-    })
+    codeElements.forEach((codeElement) => {
+      this.processCodeElement(<HTMLElement>codeElement);
+    });
 
-    for (let z of this.markdownElement.nativeElement.children){
+    this.markdownElement
+      .nativeElement.querySelectorAll('h1').forEach((codeElement) => {
+      this.processCodeElement(<HTMLElement>codeElement);
+    });
+  }
 
-      for (let p of z.getElementsByTagName('code')){
-        p.style.color = 'yellow'
+  resetHighlighting(element: HTMLElement) {
+    const highlightedElements = element.querySelectorAll('.highlighted');
+    highlightedElements.forEach((highlightedElement) => {
+      highlightedElement.classList.remove('highlighted');
+    });
+  }
+
+
+  processCodeElement(element: HTMLElement) {
+    const searchQuery = this.searchQuery.toLowerCase();
+    const searchQuery2 = this.searchQuery2.toLowerCase();
+    const childNodes = Array.from(element.childNodes);
+
+    for (let i = 0; i < childNodes.length; i++) {
+      const childNode = childNodes[i];
+      if (childNode.nodeType === Node.TEXT_NODE) {
+        const text = childNode.textContent?.toLowerCase() || '';
+        if (text.includes(searchQuery) || text.includes(searchQuery2)) {
+          const span = document.createElement('span');
+          span.classList.add('highlighted');
+          span.textContent = childNode.textContent;
+          element.replaceChild(span, childNode);
+        }
+      } else if (childNode instanceof HTMLElement) {
+        this.processCodeElement(childNode);
       }
     }
-
   }
 
-  ngAfterViewInit(): void {
+  processTextNode(node: HTMLElement, keyword: string) {
+    const span = document.createElement('span');
+    span.classList.add('highlighted');
+    span.textContent = node.textContent;
+
+    const frag = document.createDocumentFragment();
+    let lastIdx = 0;
+    keyword = keyword.toLowerCase();
+
+    node.textContent!.toLowerCase().split(keyword).forEach((seg, i, { length }) => {
+      const kd = document.createTextNode(node.textContent!.substring(lastIdx, lastIdx + seg.length));
+      lastIdx += seg.length;
+
+      frag.appendChild(kd);
+
+      if (i !== length - 1) {
+        const clone = span.cloneNode();
+        clone.textContent = node.textContent!.substr(lastIdx, keyword.length);
+        frag.appendChild(clone);
+        lastIdx += keyword.length;
+      }
+    });
+
+    node.replaceWith(frag);
+  }
+
+  ngAfterContentInit(): void {
     this.activatedRoute.url.subscribe(url => {
       this.changeMarkdownByUrl(url)
-      this.highlightFoundedText(url)
+
+      if (url[1].path.includes('?search=')) {
+        this.searchQuery = url[1].path.split('?search=')[1].split('&')[0]
+        this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
+      }
+
+      this.highlightFoundedText()
     })
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-    if (changes[this.markdownText])
-      console.log('changed')
-  }
-
 }

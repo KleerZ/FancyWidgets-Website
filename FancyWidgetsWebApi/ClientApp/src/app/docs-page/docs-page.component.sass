@@ -30,9 +30,6 @@
     @media screen and (max-width: 768px)
       min-width: auto
 
-  ::ng-deep code
-    color: #3ac9b0
-
 
   .markdown-page
     padding: 10px 25px 0 25px
@@ -46,4 +43,12 @@
 ::ng-deep pre
   border-radius: 8px
   background: #1e2634 !important
+
+::ng-deep code
+    color: #3ac9b0
+
+:host(::ng-deep .highlighted)
+  color: yellow !important
+  font-family: "Inter Bold", serif !important
+
 
