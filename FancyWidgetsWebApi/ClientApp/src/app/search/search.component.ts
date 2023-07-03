@@ -3,6 +3,8 @@ import {marked} from "marked";
 import {Docs} from "../../docs/docs";
 import {ActivatedRoute, Router} from "@angular/router";
 
+declare var $: any;
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -48,5 +50,9 @@ export class SearchComponent {
         )
       }
     }
+  }
+
+  closeModal() {
+    $('#searchModal').modal('hide');
   }
 }

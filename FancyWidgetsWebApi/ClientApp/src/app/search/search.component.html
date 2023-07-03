@@ -16,7 +16,7 @@
   </div>
   <div class="results" *ngIf="searchQuery !== ''">
     <div class="search-result mb-1 w-100" *ngFor="let result of searchResults"
-         [routerLink]="result.url">
+         [routerLink]="result.url" (click)="closeModal()">
       <span class="title">{{result.title}}</span>
       <span class="text">{{result.text}}</span>
     </div>
