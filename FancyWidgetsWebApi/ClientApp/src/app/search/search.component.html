@@ -14,7 +14,7 @@
   <div class="no-results" *ngIf="searchResults.length === 0 && searchQuery">
     No results found
   </div>
-  <div class="results" *ngIf="searchQuery !== ''">
+  <div class="results overflow-y-scroll" *ngIf="searchQuery !== '' || searchResults.length > 0">
     <div class="search-result mb-1 w-100" *ngFor="let result of searchResults"
          [routerLink]="result.url" (click)="closeModal()">
       <span class="title">{{result.title}}</span>
