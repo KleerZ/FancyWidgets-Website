@@ -1,12 +1,13 @@
 <section class="widgets-section d-flex  align-items-center flex-column">
   <span class="title text-center mb-4">Our official widgets</span>
-  <div class="container-sm widget-zone">
 
+  <app-loader class="h-100 w-100 d-flex align-items-center justify-content-center" *ngIf="!isLoaded"/>
+
+  <div *ngIf="isLoaded" class="container-sm widget-zone">
     <app-widget-card *ngFor="let widget of widgets"
                      [imagePath]="widget.imageUrl"
                      [title]="widget.name"
                      [description]="widget.description"
                      [url]="widget.downloadUrl"/>
-
   </div>
 </section>

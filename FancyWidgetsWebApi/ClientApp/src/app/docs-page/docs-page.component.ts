@@ -1,32 +1,42 @@
 import {
-  AfterContentInit,
+  AfterContentInit, AfterViewInit,
   Component,
-  ElementRef, ViewChild
+  ElementRef, OnInit, ViewChild
 } from '@angular/core';
 import {Docs} from "../../docs/docs";
-import {ActivatedRoute, UrlSegment} from "@angular/router";
+import {ActivatedRoute, Router, UrlSegment} from "@angular/router";
 import {MarkdownService} from "ngx-markdown";
 import {HttpClient} from "@angular/common/http";
+import {DocsService} from "../../common/services/docs.service";
+import {DocsModel} from "../../common/models/docsModel";
 
 @Component({
   selector: 'app-docs-page',
   templateUrl: './docs-page.component.html',
   styleUrls: ['./docs-page.component.sass']
 })
-export class DocsPageComponent implements AfterContentInit {
+export class DocsPageComponent implements OnInit {
 
+  isLoaded: boolean = false
+
+  docsArticles: DocsModel[] = []
   protected readonly Docs = Docs;
   showSidebar = true;
   markdownText: string = Docs.welcome;
 
   @ViewChild('markdown', {static: true, read: ElementRef}) markdownElement!: ElementRef<HTMLElement>;
+  @ViewChild('sidebarComponent') sidebarComponent!: ElementRef<HTMLElement>
 
   searchQuery: string = ""
   searchQuery2: string = ""
   searchResults: any[] = []
   currentUrl: string = ''
 
-  constructor(private activatedRoute: ActivatedRoute, private markdownService: MarkdownService, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private markdownService: MarkdownService,
+              private http: HttpClient,
+              private docsService: DocsService,
+              private router : Router) {
     if (window.innerWidth < 768)
       this.showSidebar = false
   }
@@ -35,28 +45,34 @@ export class DocsPageComponent implements AfterContentInit {
     this.showSidebar = !this.showSidebar;
   }
 
-  changeMarkdownByUrl(url: UrlSegment[]) {
-    if (!url[1])
+  AfterInit(): void {
+    this.activatedRoute.url.subscribe(url => {
+      if (!url)
+        return
+
+      if (url[1].path.split('?')[0] === 'welcome' || url[1].path === 'welcome') {
+        this.markdownText = Docs.welcome
+        return;
+      }
+
+      this.searchQuery = ''
+      this.searchQuery2 = ''
+
+      this.changeMarkdown(this.router.url.replace('/docs/', '').split('%')[0])
+
+      if (url[1].path.includes('?search=')) {
+        this.searchQuery = url[1].path.split('?search=')[1].split('&')[0]
+        this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
+      }
+      this.highlightFoundedText()
+    })
+  }
+
+  changeMarkdown(url: string) {
+    if (!url)
       return
 
-    if (url[1].path.split('?')[0] === 'welcome' || url[1].path === 'welcome')
-      this.markdownText = Docs.welcome
-    if (url[1].path.split('?')[0] === 'getting-started' || url[1].path === 'getting-started')
-      this.markdownText = Docs.gettingStarted
-    if (url[1].path.split('?')[0] === 'context-menu' || url[1].path === 'context-menu')
-      this.markdownText = Docs.contextMenu
-    if (url[1].path.split('?')[0] === 'settings' || url[1].path === 'settings')
-      this.markdownText = Docs.settings
-    if (url[1].path.split('?')[0] === 'components' || url[1].path === 'components')
-      this.markdownText = Docs.components
-    if (url[1].path.split('?')[0] === 'settings-provider' || url[1].path === 'settings-provider')
-      this.markdownText = Docs.settingsProvider
-    if (url[1].path.split('?')[0] === 'dependency-injection' || url[1].path === 'dependency-injection')
-      this.markdownText = Docs.di
-
-    this.searchQuery = ''
-    this.searchQuery2 = ''
-
+    this.markdownText = this.docsArticles.filter(value => value.routerUrl === url)[0]?.text
   }
 
   highlightFoundedText() {
@@ -115,7 +131,7 @@ export class DocsPageComponent implements AfterContentInit {
     let lastIdx = 0;
     keyword = keyword.toLowerCase();
 
-    node.textContent!.toLowerCase().split(keyword).forEach((seg, i, { length }) => {
+    node.textContent!.toLowerCase().split(keyword).forEach((seg, i, {length}) => {
       const kd = document.createTextNode(node.textContent!.substring(lastIdx, lastIdx + seg.length));
       lastIdx += seg.length;
 
@@ -132,22 +148,13 @@ export class DocsPageComponent implements AfterContentInit {
     node.replaceWith(frag);
   }
 
-  ngAfterContentInit(): void {
-    this.activatedRoute.url.subscribe(url => {
-      this.changeMarkdownByUrl(url)
-
-      if (!url[1])
-        return
-
-      if (url[1].path.includes('?search=')) {
-        this.searchQuery = url[1].path.split('?search=')[1].split('&')[0]
-        this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
-      }
-      this.highlightFoundedText()
-    })
-
-    this.http.get('api/docs/get-all').subscribe(value => {
-      console.log(value)
-    })
+  ngOnInit(): void {
+    this.docsService.getAll()
+      .subscribe(value => {
+        this.docsArticles = value.sort(value => value.id)
+        this.isLoaded = true
+        this.changeMarkdown(this.router.url.replace('/docs/', '').split('%')[0]);
+        this.AfterInit()
+      })
   }
 }

@@ -18,6 +18,7 @@ import {DownloadButtonComponent} from "./download-button/download-button.compone
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {DocsPageComponent} from "./docs-page/docs-page.component";
 import { SearchComponent } from './search/search.component';
+import {LoaderComponent} from "./loader/loader.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SearchComponent } from './search/search.component';
     DownloadButtonComponent,
     SidebarComponent,
     DocsPageComponent,
-    SearchComponent
+    SearchComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

@@ -19,19 +19,21 @@
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered d-flex justify-content-center align-items-center">
     <div class="modal-content bg-transparent">
-      <app-search/>
+      <app-search [searchData]="docsArticles"/>
     </div>
   </div>
 </div>
 
 <section id="docs-section" class="docs-section">
   <div class="sidebar-container">
-    <app-sidebar [ngClass]="{'show': showSidebar}"
+    <app-sidebar #sidebarComponent [ngClass]="{'show': showSidebar}"
+                 [isLoaded]="isLoaded"
+                 [docsArticles]="docsArticles"
                  [showSidebar]="showSidebar"/>
   </div>
 
   <div class="markdown-page">
-    <markdown (ready)="highlightFoundedText()" [disableSanitizer]="true" #markdown [data]="markdownText" ></markdown>
+    <markdown (ready)="highlightFoundedText()" [disableSanitizer]="true" #markdown [data]="markdownText"></markdown>
   </div>
 </section>
 

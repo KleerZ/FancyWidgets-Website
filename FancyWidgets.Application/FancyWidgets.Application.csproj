@@ -18,8 +18,5 @@
       <PackageReference Include="supabase-csharp" Version="0.12.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="CQs\Docs\Queries\" />
-    </ItemGroup>
 
 </Project>

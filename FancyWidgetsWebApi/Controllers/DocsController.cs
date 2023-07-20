@@ -1,4 +1,6 @@
 ﻿using FancyWidgets.Application.Common.SupabaseDb;
+using FancyWidgets.Application.CQs.Docs.Queries.GetAll;
+using FancyWidgets.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +20,11 @@ public class DocsController : ControllerBase
     }
 
     [HttpGet("get-all")]
-    public async Task<ActionResult> GetAll()
+    public async Task<ActionResult<IEnumerable<DocsArticle>>> GetAll()
     {
-        return Ok();
+        var getAllDocsArticlesQuery = new GetAllDocsArticlesQuery();
+        var docsArticles = await _mediator.Send(getAllDocsArticlesQuery);
+        
+        return Ok(docsArticles);
     }
 }

@@ -8,18 +8,19 @@ import {firstValueFrom} from "rxjs";
   templateUrl: './widgets-page.component.html',
   styleUrls: ['./widgets-page.component.sass']
 })
-export class WidgetsPageComponent implements OnInit {
+export class WidgetsPageComponent {
 
+  isLoaded: boolean = false
   widgets: WidgetModel[] = []
 
   constructor(private widgetService: WidgetService) {
     this.widgetService.getAll()
-      .subscribe(value => this.widgets = value)
+      .subscribe(value => {
+        this.widgets = value
+        this.isLoaded = true
+      })
   }
 
-  ngOnInit(): void {
-    // this.widgetService.getAll()
-    //   .subscribe(value => this.widgets = value)
-  }
+
 
 }
