@@ -11,12 +11,13 @@ public static class DependencyInjection
     {
         var url = configuration["Supabase:SUPABASE_URL"];
         var key = configuration["Supabase:SUPABASE_KEY"];
+        var bucketName = configuration["Supabase:SUPABASE_BUCKETNAME"];
         var options = new SupabaseOptions { AutoConnectRealtime = true };
 
-        if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(key))
+        if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(key) || string.IsNullOrEmpty(bucketName))
             throw new NullReferenceException("Missing data for Supabase");
 
         services.AddSingleton<ISupabaseService, SupabaseService>(_ =>
-            new SupabaseService(url, key, options));
+            new SupabaseService(url, key, bucketName, options));
     }
 }

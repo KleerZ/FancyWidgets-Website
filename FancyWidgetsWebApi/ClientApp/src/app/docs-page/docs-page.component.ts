@@ -6,6 +6,7 @@ import {
 import {Docs} from "../../docs/docs";
 import {ActivatedRoute, UrlSegment} from "@angular/router";
 import {MarkdownService} from "ngx-markdown";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-docs-page',
@@ -25,7 +26,7 @@ export class DocsPageComponent implements AfterContentInit {
   searchResults: any[] = []
   currentUrl: string = ''
 
-  constructor(private activatedRoute: ActivatedRoute, private markdownService: MarkdownService) {
+  constructor(private activatedRoute: ActivatedRoute, private markdownService: MarkdownService, private http: HttpClient) {
     if (window.innerWidth < 768)
       this.showSidebar = false
   }
@@ -143,6 +144,10 @@ export class DocsPageComponent implements AfterContentInit {
         this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
       }
       this.highlightFoundedText()
+    })
+
+    this.http.get('api/docs/get-all').subscribe(value => {
+      console.log(value)
     })
   }
 }
