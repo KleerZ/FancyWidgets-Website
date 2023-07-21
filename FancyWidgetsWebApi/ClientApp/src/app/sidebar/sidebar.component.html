@@ -13,7 +13,7 @@
   <app-loader class="w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="!isLoaded"></app-loader>
   <div *ngIf="isLoaded">
     <div id="categories-div" *ngFor="let category of categories; let i = index" class="d-flex flex-column">
-      <button class="category-btn mb-1 z-3"
+      <button class="category-btn mb-2 z-3"
               id="button{{i}}"
               type="button"
               data-bs-toggle="collapse"
@@ -34,7 +34,7 @@
       <div class="collapse" id="collapse{{i}}">
         <div class="articles-div">
           <div *ngFor="let docs of docsArticles">
-            <label #items *ngIf="docs.category === category" class="fancy-sidebar-button mt-1 mb-1">
+            <label #items *ngIf="docs.category === category" class="fancy-sidebar-button mb-2">
               <input type="radio" value="{{docs.routerUrl}}" name="sidebar"
                      [routerLink]="'/docs/' + docs.routerUrl"/>
               <span class="button-label">{{docs.title}}</span>
