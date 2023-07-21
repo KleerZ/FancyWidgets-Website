@@ -19,11 +19,10 @@
               data-bs-toggle="collapse"
               [attr.data-bs-target]="'#collapse' + i"
               aria-expanded="false"
-              (click)="toggleIcon('button' + i)"
               [attr.aria-controls]="'collapse' + i"
       >
         <div class="d-flex flex-row justify-content-between">
-          <div>{{category}}</div>
+          <div class="category-title">{{category}}</div>
 
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
