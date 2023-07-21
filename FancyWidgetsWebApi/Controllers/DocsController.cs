@@ -20,7 +20,7 @@ public class DocsController : ControllerBase
     }
 
     [HttpGet("get-all")]
-    public async Task<ActionResult<IEnumerable<DocsArticle>>> GetAll()
+    public async Task<ActionResult<IEnumerable<DocsArticleDto>>> GetAll()
     {
         var getAllDocsArticlesQuery = new GetAllDocsArticlesQuery();
         var docsArticles = await _mediator.Send(getAllDocsArticlesQuery);

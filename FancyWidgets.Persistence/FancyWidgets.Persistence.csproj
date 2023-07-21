@@ -7,17 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FancyWidgets.Domain\FancyWidgets.Domain.csproj" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="12.0.1" />
-      <PackageReference Include="MediatR" Version="12.1.1" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-      <PackageReference Include="supabase-csharp" Version="0.12.1" />
+      <ProjectReference Include="..\FancyWidgets.Application\FancyWidgets.Application.csproj" />
+      <ProjectReference Include="..\FancyWidgets.Domain\FancyWidgets.Domain.csproj" />
     </ItemGroup>
-
 
 
 </Project>

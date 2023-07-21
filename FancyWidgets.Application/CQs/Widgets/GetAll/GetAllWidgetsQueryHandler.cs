@@ -11,6 +11,6 @@ public class GetAllWidgetsQueryHandler : IRequestHandler<GetAllWidgetsQuery, IEn
     public GetAllWidgetsQueryHandler(ISupabaseService supabaseService) =>
         _supabaseService = supabaseService;
 
-    public async Task<IEnumerable<Widget>> Handle(GetAllWidgetsQuery request, 
+    public async Task<IEnumerable<Widget>> Handle(GetAllWidgetsQuery request,
         CancellationToken cancellationToken) => await _supabaseService.FetchDataFromDb<Widget>();
 }

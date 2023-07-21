@@ -15,6 +15,7 @@ builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    config.AddProfile(new AssemblyMappingProfile(typeof(DependencyInjection).Assembly));
 });
 
 var app = builder.Build();

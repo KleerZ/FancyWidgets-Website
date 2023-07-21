@@ -1,12 +1,9 @@
 import {
-  AfterContentInit, AfterViewInit,
   Component,
   ElementRef, OnInit, ViewChild
 } from '@angular/core';
 import {Docs} from "../../docs/docs";
-import {ActivatedRoute, Router, UrlSegment} from "@angular/router";
-import {MarkdownService} from "ngx-markdown";
-import {HttpClient} from "@angular/common/http";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DocsService} from "../../common/services/docs.service";
 import {DocsModel} from "../../common/models/docsModel";
 
@@ -20,6 +17,7 @@ export class DocsPageComponent implements OnInit {
   isLoaded: boolean = false
 
   docsArticles: DocsModel[] = []
+  categories: string[] = []
   protected readonly Docs = Docs;
   showSidebar = true;
   markdownText: string = Docs.welcome;
@@ -33,8 +31,6 @@ export class DocsPageComponent implements OnInit {
   currentUrl: string = ''
 
   constructor(private activatedRoute: ActivatedRoute,
-              private markdownService: MarkdownService,
-              private http: HttpClient,
               private docsService: DocsService,
               private router : Router) {
     if (window.innerWidth < 768)
@@ -152,9 +148,12 @@ export class DocsPageComponent implements OnInit {
     this.docsService.getAll()
       .subscribe(value => {
         this.docsArticles = value.sort(value => value.id)
+        this.categories = [...new Set(this.docsArticles.map(d => d.category))]
         this.isLoaded = true
         this.changeMarkdown(this.router.url.replace('/docs/', '').split('%')[0]);
         this.AfterInit()
       })
   }
+
+  protected readonly queueMicrotask = queueMicrotask;
 }

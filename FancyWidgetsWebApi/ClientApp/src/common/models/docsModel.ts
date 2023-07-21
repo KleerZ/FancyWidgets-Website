@@ -3,4 +3,5 @@
   title: string
   text: string
   routerUrl: string
+  category: string
 }

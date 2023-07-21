@@ -1,20 +1,24 @@
-﻿using Postgrest.Attributes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Postgrest.Attributes;
 using Postgrest.Models;
 
 namespace FancyWidgets.Domain;
 
-[Table("DocsArticle")]
+[Postgrest.Attributes.Table(nameof(DocsArticle))]
 public class DocsArticle : BaseModel
 {
-    [PrimaryKey("id")]
+    [PrimaryKey]
     public int Id { get; set; }
     
-    [Column("title")]
+    [ForeignKey("DocsCategoryId")]
+    public int DocsCategoryId { get; set; }
+    
+    [Postgrest.Attributes.Column(nameof(Title))]
     public string Title { get; set; } = "";
     
-    [Column("text")]
+    [Postgrest.Attributes.Column(nameof(Text))]
     public string Text { get; set; } = "";
     
-    [Column("router-url")]
+    [Postgrest.Attributes.Column(nameof(RouterUrl))]
     public string RouterUrl { get; set; } = "";
 }

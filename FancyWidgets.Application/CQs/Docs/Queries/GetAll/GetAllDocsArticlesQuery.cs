@@ -1,9 +1,8 @@
-﻿using FancyWidgets.Domain;
-using MediatR;
+﻿using MediatR;
 
 namespace FancyWidgets.Application.CQs.Docs.Queries.GetAll;
 
-public class GetAllDocsArticlesQuery : IRequest<IEnumerable<DocsArticle>>
+public class GetAllDocsArticlesQuery : IRequest<IEnumerable<DocsArticleDto>>
 {
     
 }

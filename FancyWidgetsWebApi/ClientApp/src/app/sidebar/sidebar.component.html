@@ -11,14 +11,40 @@
   <span class="docs-title">DOCUMENTATION</span>
 
   <app-loader class="w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="!isLoaded"></app-loader>
-    <div *ngIf="isLoaded" class="d-flex gap-2 mt-2 flex-column">
+  <div *ngIf="isLoaded">
+    <div id="categories-div" *ngFor="let category of categories; let i = index" class="d-flex flex-column">
+      <button class="category-btn mb-1 z-3"
+              id="button{{i}}"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse' + i"
+              aria-expanded="false"
+              (click)="toggleIcon('button' + i)"
+              [attr.aria-controls]="'collapse' + i"
+      >
+        <div class="d-flex flex-row justify-content-between">
+          <div>{{category}}</div>
 
-      <label #items *ngFor="let docs of docsArticles" class="fancy-sidebar-button">
-        <input type="radio" value="{{docs.routerUrl}}" name="sidebar"
-               [routerLink]="'/docs/' + docs.routerUrl" />
-        <span class="button-label">{{docs.title}}</span>
-      </label>
-
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+              <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+            </svg>
+          </div>
+        </div>
+      </button>
+      <div class="collapse" id="collapse{{i}}">
+        <div class="articles-div">
+          <div *ngFor="let docs of docsArticles">
+            <label #items *ngIf="docs.category === category" class="fancy-sidebar-button mt-1 mb-1">
+              <input type="radio" value="{{docs.routerUrl}}" name="sidebar"
+                     [routerLink]="'/docs/' + docs.routerUrl"/>
+              <span class="button-label">{{docs.title}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
+
+  </div>
 
 </div>
