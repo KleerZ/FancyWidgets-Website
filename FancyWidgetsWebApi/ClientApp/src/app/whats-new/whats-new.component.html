@@ -1,0 +1,15 @@
+<section infiniteScroll
+         [infiniteScrollDistance]="0.3"
+         [infiniteScrollThrottle]="100"
+         (scrolled)="onScroll()"
+         id="scroll-section"
+         class="whats-new d-flex flex-column align-items-center w-100 container-sm">
+  <h1 class="title mb-2">What's New in Fancy Widgets</h1>
+
+  <app-whats-new-block class="w-100 px-2 d-flex justify-content-center"
+                       *ngFor="let update of updates" [title]="update.title"
+                       [text]="update.text"
+                       [version]="update.version"
+                       [date]="update.date"/>
+
+</section>

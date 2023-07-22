@@ -1,0 +1,30 @@
+@import "src/colors"
+
+.update-div
+  display: flex
+  flex-direction: column
+  background: #1D2432
+  border-radius: 10px
+  padding: 20px
+
+  .update-info
+    display: flex
+    flex-direction: row
+    padding-bottom: 5px
+    border-bottom: 3px solid white
+
+    .update-title
+      font-family: "Inter SemiBold",serif
+
+    .update-version
+      color: $light-grey
+
+    .update-date
+      display: flex
+      text-align: right !important
+      align-content: end !important
+      align-self: end
+
+:host(::ng-deep markdown)
+  width: 100%
+  color: #e3e3e3 !important

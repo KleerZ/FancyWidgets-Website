@@ -6,24 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FancyWidgetsWebApi.Controllers;
 
-[ApiController]
 [Route("api/docs")]
-public class DocsController : ControllerBase
+public class DocsController : BaseController
 {
-    private readonly IMediator _mediator;
-    private readonly ISupabaseService _supabaseService;
-
-    public DocsController(IMediator mediator, ISupabaseService supabaseService)
-    {
-        _mediator = mediator;
-        _supabaseService = supabaseService;
-    }
+    public DocsController(IMediator mediator) : base(mediator) {}
 
     [HttpGet("get-all")]
     public async Task<ActionResult<IEnumerable<DocsArticleDto>>> GetAll()
     {
         var getAllDocsArticlesQuery = new GetAllDocsArticlesQuery();
-        var docsArticles = await _mediator.Send(getAllDocsArticlesQuery);
+        var docsArticles = await Mediator.Send(getAllDocsArticlesQuery);
         
         return Ok(docsArticles);
     }

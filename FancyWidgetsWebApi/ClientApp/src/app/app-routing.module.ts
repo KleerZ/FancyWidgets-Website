@@ -5,6 +5,7 @@ import {WidgetsPageComponent} from "./widgets-page/widgets-page.component";
 import {HowToUsePageComponent} from "./how-to-use-page/how-to-use-page.component";
 import {SupportPageComponent} from "./support-page/support-page.component";
 import {DocsPageComponent} from "./docs-page/docs-page.component";
+import {WhatsNewComponent} from "./whats-new/whats-new.component";
 
 const routes: Routes = [
   {path: "", component: HomeComponent, pathMatch: "full", title: "Fancy Widgets"},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: "docs", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
   {path: "docs/:page", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
   {path: "docs/:page/:search", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
+  {path: "whats-new", component: WhatsNewComponent, pathMatch: "full", title: "Fancy Widgets - What's New"},
 ];
 
 @NgModule({

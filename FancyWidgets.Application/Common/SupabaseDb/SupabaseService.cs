@@ -1,5 +1,8 @@
-﻿using Postgrest.Models;
+﻿using Postgrest;
+using Postgrest.Models;
 using Supabase;
+using Supabase.Interfaces;
+using Supabase.Realtime;
 using Supabase.Storage;
 using Supabase.Storage.Interfaces;
 using Client = Supabase.Client;
@@ -22,6 +25,15 @@ public class SupabaseService : ISupabaseService
     {
         var result = await _supabaseClient.From<T>().Get();
         return result.Models;
+    }
+    
+    public async Task<List<T>> FetchDataFromDb<T>(Func<ISupabaseTable<T, RealtimeChannel>, Table<T>> action) where T : BaseModel, new()
+    {
+        var table = _supabaseClient.From<T>();
+        var data = action.Invoke(table);
+        var results = await data.Get();
+     
+        return results.Models;
     }
 
     public async Task InsertDataToDb<T>(T model) where T : BaseModel, new() =>

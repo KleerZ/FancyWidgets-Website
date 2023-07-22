@@ -5,22 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FancyWidgetsWebApi.Controllers;
 
-[ApiController]
 [Route("api/widgets")]
-public class WidgetController : ControllerBase
+public class WidgetController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public WidgetController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public WidgetController(IMediator mediator) : base(mediator) {}
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Widget>>> GetAll()
     {
         var getAllWidgetsQuery = new GetAllWidgetsQuery();
-        var widgets = await _mediator.Send(getAllWidgetsQuery);
+        var widgets = await Mediator.Send(getAllWidgetsQuery);
         
         return Ok(widgets);
     }

@@ -19,6 +19,9 @@ import {SidebarComponent} from "./sidebar/sidebar.component";
 import {DocsPageComponent} from "./docs-page/docs-page.component";
 import { SearchComponent } from './search/search.component';
 import {LoaderComponent} from "./loader/loader.component";
+import {WhatsNewComponent} from "./whats-new/whats-new.component";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {WhatsNewBlockComponent} from "./whats-new-block/whats-new-block.component";
 
 @NgModule({
   declarations: [
@@ -34,18 +37,21 @@ import {LoaderComponent} from "./loader/loader.component";
     SidebarComponent,
     DocsPageComponent,
     SearchComponent,
-    LoaderComponent
+    LoaderComponent,
+    WhatsNewComponent,
+    WhatsNewBlockComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    NgOptimizedImage,
-    AppRoutingModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient
-    })
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        NgOptimizedImage,
+        AppRoutingModule,
+        MarkdownModule.forRoot({
+            loader: HttpClient
+        }),
+        InfiniteScrollModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
