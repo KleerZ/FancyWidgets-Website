@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, Output, ViewChild, ViewContainerRef} from 
 import {marked} from "marked";
 import {Docs} from "../../docs/docs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DocsModel} from "../../common/models/docsModel";
 
 declare var $: any;
 
@@ -11,6 +12,9 @@ declare var $: any;
   styleUrls: ['./search.component.sass']
 })
 export class SearchComponent {
+
+  @Input()
+  public searchData: DocsModel[] = []
 
   showSearchPanel: boolean = false
 
@@ -24,16 +28,14 @@ export class SearchComponent {
 
     this.searchResults = []
 
-    this.searchInMarkdown(Docs.gettingStarted, '/docs/getting-started', 'Getting Started')
-    this.searchInMarkdown(Docs.contextMenu, '/docs/context-menu', "Context Menu")
-    this.searchInMarkdown(Docs.settings, '/docs/settings', 'Settings')
-    this.searchInMarkdown(Docs.components, '/docs/components', 'Components')
-    this.searchInMarkdown(Docs.settingsProvider, '/docs/settings-provider', 'Settings Provider')
-    this.searchInMarkdown(Docs.di, '/docs/dependency-injection', "Dependency Injection")
+    this.searchData.forEach(value => {
+      this.searchInMarkdown(value.text, `/docs/${value.routerUrl}`, value.title)
+    })
   }
 
   clearSearchInput() {
     this.searchQuery = ''
+    this.searchResults = []
   }
 
   searchInMarkdown(markdown: string, url: string, title: string) {
