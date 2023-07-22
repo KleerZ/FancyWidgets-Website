@@ -11,6 +11,7 @@ import {HtmlParser} from "@angular/compiler";
 })
 export class WhatsNewComponent implements OnInit {
 
+  isLoaded: boolean = false
   updates: WhatsNewModel[] = []
   from: number = 0
   to: number = 5
@@ -21,21 +22,13 @@ export class WhatsNewComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.updates = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
-    console.log('start')
-    console.log('from: ' + this.from )
-    console.log('to: ' + this.to )
-    console.log('----------------------')
+    this.isLoaded = true
   }
 
   async onScroll(){
     this.from = this.to + 1
     this.to += 4
-    console.log('from: ' + this.from )
-    console.log('to: ' + this.to )
     let results = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
-    console.log(results.length)
-
     this.updates.push(...results)
-
   }
 }

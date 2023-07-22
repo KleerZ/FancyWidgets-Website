@@ -1,7 +1,6 @@
 ﻿using FancyWidgets.Application.Common.SupabaseDb;
 using FancyWidgets.Domain;
 using MediatR;
-using Postgrest;
 
 namespace FancyWidgets.Application.CQs.Updates.GetRange;
 

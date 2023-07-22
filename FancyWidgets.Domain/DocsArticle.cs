@@ -7,7 +7,7 @@ namespace FancyWidgets.Domain;
 [Postgrest.Attributes.Table(nameof(DocsArticle))]
 public class DocsArticle : BaseModel
 {
-    [PrimaryKey]
+    [PrimaryKey(nameof(Id))]
     public int Id { get; set; }
     
     [ForeignKey("DocsCategoryId")]

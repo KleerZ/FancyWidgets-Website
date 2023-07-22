@@ -1,4 +1,6 @@
-﻿using Postgrest;
+﻿using System.Collections;
+using Postgrest;
+using Postgrest.Attributes;
 using Postgrest.Models;
 using Supabase;
 using Supabase.Interfaces;
@@ -6,6 +8,7 @@ using Supabase.Realtime;
 using Supabase.Storage;
 using Supabase.Storage.Interfaces;
 using Client = Supabase.Client;
+using Index = System.Index;
 
 namespace FancyWidgets.Application.Common.SupabaseDb;
 
@@ -21,19 +24,20 @@ public class SupabaseService : ISupabaseService
         _supabaseClient.InitializeAsync();
     }
 
-    public async Task<List<T>> FetchDataFromDb<T>() where T : BaseModel, new()
+    public async Task<IEnumerable<T>> FetchDataFromDb<T>() where T : BaseModel, new()
     {
         var result = await _supabaseClient.From<T>().Get();
-        return result.Models;
+        return result.Models.OrderBy(x => x.PrimaryKey.Values.First());
     }
     
-    public async Task<List<T>> FetchDataFromDb<T>(Func<ISupabaseTable<T, RealtimeChannel>, Table<T>> action) where T : BaseModel, new()
+    public async Task<IEnumerable<T>> FetchDataFromDb<T>(Func<ISupabaseTable<T, RealtimeChannel>,Table<T>> action)
+        where T : BaseModel, new()
     {
         var table = _supabaseClient.From<T>();
         var data = action.Invoke(table);
         var results = await data.Get();
-     
-        return results.Models;
+
+        return results.Models.OrderBy(x => x.PrimaryKey.Values.First());
     }
 
     public async Task InsertDataToDb<T>(T model) where T : BaseModel, new() =>

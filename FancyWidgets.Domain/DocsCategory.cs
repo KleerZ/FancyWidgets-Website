@@ -5,7 +5,7 @@ namespace FancyWidgets.Domain;
 
 public class DocsCategory : BaseModel
 {
-    [PrimaryKey]
+    [PrimaryKey(nameof(Id))]
     public int Id { get; set; }
     
     [Column(nameof(Title))]
