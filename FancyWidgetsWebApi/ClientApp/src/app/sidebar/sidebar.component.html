@@ -1,8 +1,8 @@
-<div #sidebar class="fancy-sidebar" [ngClass]="{'show': showSidebar}">
+<div class="fancy-sidebar" [ngClass]="{'show': showSidebar}">
   <div class="mb-3">
     <label class="fancy-sidebar-button">
       <input type="radio"
-             [routerLink]="'/docs/welcome'"
+             [routerLink]="['/docs/welcome']"
              value="welcome" name="sidebar" [checked]="true"/>
       <span class="button-label">Welcome</span>
     </label>
@@ -10,7 +10,8 @@
 
   <span class="docs-title">DOCUMENTATION</span>
 
-  <app-loader class="w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="!isLoaded"></app-loader>
+  <app-loader class="w-100 h-100 d-flex justify-content-center align-items-center" *ngIf="!isLoaded"/>
+
   <div *ngIf="isLoaded">
     <div id="categories-div" *ngFor="let category of categories; let i = index" class="d-flex flex-column">
       <button class="category-btn mb-2 z-3"
@@ -36,7 +37,7 @@
           <div *ngFor="let docs of docsArticles">
             <label #items *ngIf="docs.category === category" class="fancy-sidebar-button mb-2">
               <input type="radio" value="{{docs.routerUrl}}" name="sidebar"
-                     [routerLink]="'/docs/' + docs.routerUrl"/>
+                     [routerLink]="['/docs/' + docs.routerUrl]"/>
               <span class="button-label">{{docs.title}}</span>
             </label>
           </div>

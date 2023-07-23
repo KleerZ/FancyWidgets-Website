@@ -7,7 +7,8 @@ const PROXY_CONFIG = [
   {
     context: [
       "/api/docs",
-      "/api/widgets"
+      "/api/widgets",
+      "/api/whats-new"
    ],
     target: target,
     secure: false,

@@ -1,5 +1,5 @@
 import {
-  AfterContentInit, AfterViewInit,
+  AfterViewInit,
   Component,
   ElementRef,
   Input, OnInit, QueryList, ViewChildren,
@@ -36,7 +36,8 @@ export class SidebarComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     this.items.changes.subscribe(() => {
-      if (this.items.length === this.items.toArray().filter(item => item.nativeElement.textContent).length) {
+      if (this.items.length === this.items.toArray()
+        .filter(item => item.nativeElement.textContent).length) {
         this.checkDefaultLink();
       }
     });
@@ -45,9 +46,11 @@ export class SidebarComponent implements AfterViewInit, OnInit {
   checkDefaultLink() {
     document.querySelectorAll('input')
       .forEach((value, key) => {
-        if (value.value === this.router.url.replace('/docs/', '').split('%')[0]) {
+        if (value.value === this.router.url.replace('/docs/', '')
+          .split('%')[0]) {
           value.checked = true
-          $(`#${value.parentElement!.parentElement!.parentElement!.parentElement!.id}`).collapse({toggle: false})
+          $('#' + `${value.parentElement!.parentElement!.parentElement!.parentElement!.id}`)
+            .collapse({toggle: false})
         }
       })
   }
