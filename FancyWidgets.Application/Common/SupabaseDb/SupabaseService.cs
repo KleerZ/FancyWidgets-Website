@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Postgrest;
-using Postgrest.Attributes;
+﻿using Postgrest;
 using Postgrest.Models;
 using Supabase;
 using Supabase.Interfaces;
@@ -8,7 +6,6 @@ using Supabase.Realtime;
 using Supabase.Storage;
 using Supabase.Storage.Interfaces;
 using Client = Supabase.Client;
-using Index = System.Index;
 
 namespace FancyWidgets.Application.Common.SupabaseDb;
 

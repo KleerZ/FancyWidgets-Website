@@ -43,7 +43,7 @@ export class DocsPageComponent implements OnInit {
 
   AfterInit(): void {
     this.activatedRoute.url.subscribe(url => {
-      if (!url)
+      if (!url[1])
         return
 
       if (url[1].path.split('?')[0] === 'welcome' || url[1].path === 'welcome') {
@@ -59,15 +59,14 @@ export class DocsPageComponent implements OnInit {
       if (url[1].path.includes('?search=')) {
         this.searchQuery = url[1].path.split('?search=')[1].split('&')[0]
         this.searchQuery2 = url[1].path.split('?search=')[1].split('&')[1]
+        this.highlightFoundedText()
       }
-      this.highlightFoundedText()
     })
   }
 
   changeMarkdown(url: string) {
     if (!url)
       return
-
     this.markdownText = this.docsArticles.filter(value => value.routerUrl === url)[0]?.text
   }
 

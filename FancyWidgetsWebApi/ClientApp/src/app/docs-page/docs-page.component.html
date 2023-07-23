@@ -26,7 +26,8 @@
 
 <section id="docs-section" class="docs-section">
   <div class="sidebar-container">
-    <app-sidebar #sidebarComponent [ngClass]="{'show': showSidebar}"
+    <app-sidebar #sidebarComponent
+                 [ngClass]="{'show': showSidebar}"
                  [isLoaded]="isLoaded"
                  [categories]="categories"
                  [docsArticles]="docsArticles"
@@ -34,7 +35,10 @@
   </div>
 
   <div class="markdown-page">
-    <markdown (ready)="highlightFoundedText()" [disableSanitizer]="true" #markdown [data]="markdownText"></markdown>
+    <markdown (ready)="highlightFoundedText()"
+              [disableSanitizer]="true"
+              #markdown
+              [data]="markdownText"/>
   </div>
 </section>
 
