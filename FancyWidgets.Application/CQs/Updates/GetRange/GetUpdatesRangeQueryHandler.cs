@@ -1,6 +1,7 @@
 ﻿using FancyWidgets.Application.Common.SupabaseDb;
 using FancyWidgets.Domain;
 using MediatR;
+using Postgrest;
 
 namespace FancyWidgets.Application.CQs.Updates.GetRange;
 
@@ -18,6 +19,6 @@ public class GetUpdatesRangeQueryHandler : IRequestHandler<GetUpdatesRangeQuery,
         var results = await _supabaseService
             .FetchDataFromDb<WhatsNew>(table => table.Range(request.From, request.To));
 
-        return results;
+        return results.OrderByDescending(@new => @new.Date);
     }
 }

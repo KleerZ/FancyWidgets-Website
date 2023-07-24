@@ -4,7 +4,12 @@
          (scrolled)="onScroll()"
          id="scroll-section"
          class="whats-new d-flex flex-column align-items-center w-100 container-sm">
-  <h1 class="title mb-2">What's New in Fancy Widgets</h1>
+  <h1 *ngIf="!showWidgetUpdates" class="page-title mb-2">What's New in Fancy Widgets</h1>
+
+  <div class="mb-3 text-center px-2" *ngIf="showWidgetUpdates">
+    <h3 class="page-title">{{widget.name}} - Changelogs</h3>
+    <span class="fs-6">Latest version: {{widget.version}}</span>
+  </div>
 
   <app-loader *ngIf="!isLoaded"/>
   <div class="w-100" *ngIf="isLoaded">

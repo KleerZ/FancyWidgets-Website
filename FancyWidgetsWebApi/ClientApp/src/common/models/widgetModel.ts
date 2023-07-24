@@ -4,4 +4,5 @@
   description: string
   downloadUrl: string
   imageUrl: string
+  version: string
 }

@@ -16,4 +16,8 @@ export class WidgetService {
   getAll(){
     return this.http.get<WidgetModel[]>(this.baseUrl)
   }
+
+  getById(id: any) {
+    return this.http.get<WidgetModel>(`${this.baseUrl}/${id}`)
+  }
 }

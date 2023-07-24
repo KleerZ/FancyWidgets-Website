@@ -1,6 +1,7 @@
 ﻿using FancyWidgets.Application.Common.SupabaseDb;
 using FancyWidgets.Domain;
 using MediatR;
+using Postgrest;
 
 namespace FancyWidgets.Application.CQs.Updates.GetAll;
 
@@ -17,6 +18,6 @@ public class GetAllUpdatesQueryHandler : IRequestHandler<GetAllUpdatesQuery, IEn
         CancellationToken cancellationToken)
     {
         var updates = await _supabaseService.FetchDataFromDb<WhatsNew>();
-        return updates;
+        return updates.OrderByDescending(@new => @new.Date);
     }
 }

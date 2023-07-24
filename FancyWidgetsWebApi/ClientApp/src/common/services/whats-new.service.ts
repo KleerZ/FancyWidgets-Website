@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {WidgetModel} from "../models/widgetModel";
 import {DocsModel} from "../models/docsModel";
@@ -15,11 +15,16 @@ export class WhatsNewService {
 
   }
 
-  getAll(){
+  getAll() {
     return this.http.get<WhatsNewModel[]>(`${this.baseUrl}`)
   }
 
-  getRange(from: number, to: number){
+  getRange(from: number, to: number) {
     return this.http.get<WhatsNewModel[]>(`${this.baseUrl}/get-range?from=${from}&to=${to}`)
+  }
+
+  getByWidgetId(id: any) {
+    let widgetId = <number>id
+    return this.http.get<WhatsNewModel[]>(`${this.baseUrl}/get-by-widget-id/${widgetId}`)
   }
 }
