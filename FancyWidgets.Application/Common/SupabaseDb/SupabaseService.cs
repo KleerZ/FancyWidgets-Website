@@ -39,7 +39,4 @@ public class SupabaseService : ISupabaseService
 
     public async Task InsertDataToDb<T>(T model) where T : BaseModel, new() =>
         await _supabaseClient.From<T>().Insert(model);
-
-    public async Task<byte[]> GetImageBytes(string path) =>
-        await _supabaseStorage!.Download(path, null);
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -22,6 +22,8 @@ import {LoaderComponent} from "./loader/loader.component";
 import {WhatsNewComponent} from "./whats-new/whats-new.component";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {WhatsNewBlockComponent} from "./whats-new-block/whats-new-block.component";
+import {CryptoCloudComponent} from "./cryptocloud/cryptocloud.component";
+import {SupportProjectComponent} from "./support-project/support-project.component";
 
 @NgModule({
   declarations: [
@@ -39,19 +41,23 @@ import {WhatsNewBlockComponent} from "./whats-new-block/whats-new-block.componen
     SearchComponent,
     LoaderComponent,
     WhatsNewComponent,
-    WhatsNewBlockComponent
+    WhatsNewBlockComponent,
+    CryptoCloudComponent,
+    SupportProjectComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        FormsModule,
-        NgOptimizedImage,
-        AppRoutingModule,
-        MarkdownModule.forRoot({
-            loader: HttpClient
-        }),
-        InfiniteScrollModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    NgOptimizedImage,
+    AppRoutingModule,
+    MarkdownModule.forRoot({
+      loader: HttpClient
+    }),
+    InfiniteScrollModule,
+    ReactiveFormsModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,41 @@
+<link href="https://api.cryptocloud.plus/static/pay_btn/css/app.css" rel="stylesheet">
+
+<div class="w-100 d-flex align-items-center flex-column px-2">
+
+  <div class="pay-div d-flex align-items-center flex-column">
+    <h3 class="text-white title mb-3">CryptoCloud</h3>
+    <form class="d-flex w-100 flex-column col-3" (ngSubmit)="pay()" [formGroup]="cryptoCloudForm">
+      <input [formControl]="cryptoCloudForm.controls.amount" class="mb-2" type="number" placeholder="USD">
+      <span class="alert alert-danger" *ngIf="cryptoCloudForm.controls.amount.errors?.required &&
+            cryptoCloudForm.controls.amount.touched || cryptoCloudForm.controls.amount.errors?.min &&
+            cryptoCloudForm.controls.amount.touched">
+        Value must not be less than 1
+      </span>
+
+      <input [formControl]="cryptoCloudForm.controls.email" class="mb-2" type="email" placeholder="Email">
+      <span class="alert alert-danger" *ngIf="cryptoCloudForm.controls.email.errors?.required &&
+            cryptoCloudForm.controls.email.touched || cryptoCloudForm.controls.email.errors?.email &&
+            cryptoCloudForm.controls.email.touched">
+        Incorrect email
+      </span>
+
+      <input class="real-pay-btn" [disabled]="cryptoCloudForm.invalid"
+             type="submit"
+             value="Donate">
+
+      <vue-widget #payBtn
+                  class="d-none"
+                  shop_id="{{shopId}}"
+                  api_key="{{apiKey}}"
+                  background="#000" color="#fff"
+                  border_color="#000"
+                  logo="white"
+                  currency="USD"
+                  email="{{cryptoCloudForm.controls.email.value}}"
+                  amount="{{cryptoCloudForm.controls.amount.value}}"
+                  text_btn="Pay with CryptoCloud"
+                  order_id="{{cryptoCloudForm.controls.email.value}}"></vue-widget>
+    </form>
+  </div>
+
+</div>
