@@ -1,4 +1,5 @@
 ﻿using FancyWidgets.Application.CQs.Updates.GetAll;
+using FancyWidgets.Application.CQs.Updates.GetByWidgetId;
 using FancyWidgets.Application.CQs.Updates.GetRange;
 using FancyWidgets.Domain;
 using MediatR;
@@ -25,6 +26,15 @@ public class WhatsNewController : BaseController
     {
         var getUpdatesRangeQuery = new GetUpdatesRangeQuery(from, to);
         var updates = await Mediator.Send(getUpdatesRangeQuery);
+
+        return Ok(updates);
+    }
+
+    [HttpGet("get-by-widget-id/{id:int}")]
+    public async Task<ActionResult<IEnumerable<WhatsNew>>> GetByWidgetId(int id)
+    {
+        var getUpdatesByWidgetIdQuery = new GetUpdatesByWidgetIdQuery(id);
+        var updates = await Mediator.Send(getUpdatesByWidgetIdQuery);
 
         return Ok(updates);
     }

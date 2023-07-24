@@ -1,22 +1,27 @@
-﻿using Postgrest.Attributes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Postgrest.Attributes;
 using Postgrest.Models;
 
 namespace FancyWidgets.Domain;
 
+[Postgrest.Attributes.Table(nameof(WhatsNew))]
 public class WhatsNew : BaseModel
 {
     [PrimaryKey(nameof(Id))]
     public int Id { get; set; }
+    
+    [ForeignKey("WidgetId")]
+    public int WidgetId { get; set; }
 
-    [Column(nameof(Title))]
+    [Postgrest.Attributes.Column(nameof(Title))]
     public string Title { get; set; } = "";
     
-    [Column(nameof(Text))]
+    [Postgrest.Attributes.Column(nameof(Text))]
     public string Text { get; set; } = "";
     
-    [Column(nameof(Version))]
+    [Postgrest.Attributes.Column(nameof(Version))]
     public string Version { get; set; } = "";
     
-    [Column(nameof(Date))]
+    [Postgrest.Attributes.Column(nameof(Date))]
     public DateTime Date { get; set; }
 }

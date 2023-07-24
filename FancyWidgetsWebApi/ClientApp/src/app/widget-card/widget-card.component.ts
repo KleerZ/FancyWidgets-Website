@@ -7,6 +7,9 @@ import {Component, Input} from '@angular/core';
 })
 export class WidgetCardComponent {
   @Input()
+  public id: number = 0
+
+  @Input()
   public title: string = ""
 
   @Input()
@@ -18,4 +21,6 @@ export class WidgetCardComponent {
   @Input()
   public imagePath: string = ""
 
+  @Input()
+  public version: string = ""
 }

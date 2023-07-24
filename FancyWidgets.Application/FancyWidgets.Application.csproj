@@ -17,6 +17,8 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
       <PackageReference Include="supabase-csharp" Version="0.12.1" />
 
+
+
     </ItemGroup>
 
 

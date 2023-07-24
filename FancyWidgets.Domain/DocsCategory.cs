@@ -3,6 +3,7 @@ using Postgrest.Models;
 
 namespace FancyWidgets.Domain;
 
+[Table(nameof(DocsCategory))]
 public class DocsCategory : BaseModel
 {
     [PrimaryKey(nameof(Id))]
