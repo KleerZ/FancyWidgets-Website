@@ -27,4 +27,12 @@ export class WhatsNewService {
     let widgetId = <number>id
     return this.http.get<WhatsNewModel[]>(`${this.baseUrl}/get-by-widget-id/${widgetId}`)
   }
+
+  getAllWidgetsUpdates() {
+    return this.http.get<WhatsNewModel[]>(`${this.baseUrl}/get-all-widgets-updates`)
+  }
+
+  getAllApplicationUpdates() {
+    return this.http.get<WhatsNewModel[]>(`${this.baseUrl}/get-all-application-updates`)
+  }
 }

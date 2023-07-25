@@ -6,6 +6,26 @@
          class="whats-new d-flex flex-column align-items-center w-100 container-sm">
   <h1 *ngIf="!showWidgetUpdates" class="page-title mb-2">What's New in Fancy Widgets</h1>
 
+  <div *ngIf="!showWidgetUpdates" class="w-100 d-flex justify-content-center mb-2">
+    <div class="category-btn-group d-flex flex-row gap-2" aria-label="radio toggle">
+      <div [routerLink]="['/whats-new']">
+        <input  type="radio" class="btn-check"
+               name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+        <label class="btn btn-outline-danger" for="vbtn-radio1">All</label>
+      </div>
+     <div [routerLink]="['/whats-new/widgets']">
+       <input type="radio" class="btn-check"
+              name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+       <label class="btn btn-outline-danger" for="vbtn-radio2">Widgets</label>
+     </div>
+     <div [routerLink]="['/whats-new/application']">
+       <input type="radio" class="btn-check"
+              name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+       <label class="btn btn-outline-danger" for="vbtn-radio3">Application</label>
+     </div>
+    </div>
+  </div>
+
   <div class="mb-3 text-center px-2" *ngIf="showWidgetUpdates">
     <h3 class="page-title">{{widget.name}} - Changelogs</h3>
     <span class="fs-6">Latest version: {{widget.version}}</span>

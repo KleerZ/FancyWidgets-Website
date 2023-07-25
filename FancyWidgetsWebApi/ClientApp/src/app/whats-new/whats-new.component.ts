@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {WhatsNewService} from "../../common/services/whats-new.service";
 import {WhatsNewModel} from "../../common/models/whatsNewModel";
 import {firstValueFrom} from "rxjs";
@@ -12,7 +12,7 @@ import {WidgetModel} from "../../common/models/widgetModel";
   templateUrl: './whats-new.component.html',
   styleUrls: ['./whats-new.component.sass']
 })
-export class WhatsNewComponent implements OnInit {
+export class WhatsNewComponent implements AfterViewInit {
 
   isLoaded: boolean = false
   updates: WhatsNewModel[] = []
@@ -28,14 +28,26 @@ export class WhatsNewComponent implements OnInit {
 
   }
 
-  async ngOnInit(): Promise<void> {
-    if (this.activatedRoute.snapshot.paramMap.get('widgetId')) {
-      await this.getWidgetChangelogById(this.activatedRoute.snapshot.paramMap.get('widgetId')!)
-      return
-    }
+  async ngAfterViewInit(): Promise<void> {
+    this.activatedRoute.paramMap.subscribe(async value => {
+      if (value.get('category') === 'widgets') {
+        await this.getGetAllWidgetsUpdates()
+        return
+      }
 
-    this.updates = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
-    this.isLoaded = true
+      if (value.get('category') === 'application') {
+        await this.getGetAllApplicationUpdates()
+        return
+      }
+
+      if (value.get('category')) {
+        await this.getWidgetChangelogById(value.get('category')!)
+        return
+      }
+
+      this.updates = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
+      this.isLoaded = true
+    })
   }
 
   async onScroll() {
@@ -54,5 +66,27 @@ export class WhatsNewComponent implements OnInit {
     this.widget = await firstValueFrom(this.widgetService.getById(id))
     this.updates = await firstValueFrom(this.whatsNewService.getByWidgetId(id))
     this.isLoaded = true
+  }
+
+  async getGetAllWidgetsUpdates(){
+    this.checkInputById('vbtn-radio2')
+    this.isLoaded = false
+    this.showWidgetUpdates = false
+    this.updates = await firstValueFrom(this.whatsNewService.getAllWidgetsUpdates())
+    this.isLoaded = true
+  }
+
+  async getGetAllApplicationUpdates(){
+    this.checkInputById('vbtn-radio3')
+    this.isLoaded = false
+    this.showWidgetUpdates = false
+    this.updates = await firstValueFrom(this.whatsNewService.getAllApplicationUpdates())
+    this.isLoaded = true
+  }
+
+  checkInputById(id: string){
+    let input: any = document.getElementById(id)!
+    console.log(input)
+    input!.checked = true
   }
 }

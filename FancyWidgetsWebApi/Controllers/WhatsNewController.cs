@@ -1,4 +1,6 @@
 ﻿using FancyWidgets.Application.CQs.Updates.GetAll;
+using FancyWidgets.Application.CQs.Updates.GetAllApplicationUpdates;
+using FancyWidgets.Application.CQs.Updates.GetAllWidgetsUpdates;
 using FancyWidgets.Application.CQs.Updates.GetByWidgetId;
 using FancyWidgets.Application.CQs.Updates.GetRange;
 using FancyWidgets.Domain;
@@ -35,6 +37,24 @@ public class WhatsNewController : BaseController
     {
         var getUpdatesByWidgetIdQuery = new GetUpdatesByWidgetIdQuery(id);
         var updates = await Mediator.Send(getUpdatesByWidgetIdQuery);
+
+        return Ok(updates);
+    }
+    
+    [HttpGet("get-all-widgets-updates")]
+    public async Task<ActionResult<IEnumerable<WhatsNew>>> GetAllWidgetsUpdate()
+    {
+        var getAllWidgetsUpdatesQuery = new GetAllWidgetsUpdateQuery();
+        var updates = await Mediator.Send(getAllWidgetsUpdatesQuery);
+
+        return Ok(updates);
+    }
+
+    [HttpGet("get-all-application-updates")]
+    public async Task<ActionResult<IEnumerable<WhatsNew>>> GetAllApplicationUpdate()
+    {
+        var getAllApplicationUpdatesQuery = new GetAllApplicationUpdatesQuery();
+        var updates = await Mediator.Send(getAllApplicationUpdatesQuery);
 
         return Ok(updates);
     }

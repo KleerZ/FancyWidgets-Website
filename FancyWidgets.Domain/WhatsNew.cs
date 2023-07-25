@@ -9,9 +9,9 @@ public class WhatsNew : BaseModel
 {
     [PrimaryKey(nameof(Id))]
     public int Id { get; set; }
-    
-    [ForeignKey("WidgetId")]
-    public int WidgetId { get; set; }
+
+    [ForeignKey("WidgetId")] 
+    public int? WidgetId { get; set; } = null;
 
     [Postgrest.Attributes.Column(nameof(Title))]
     public string Title { get; set; } = "";

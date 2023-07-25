@@ -17,12 +17,12 @@ const routes: Routes = [
   {path: "docs/:page", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
   {path: "docs/:page/:search", component: DocsPageComponent, pathMatch: "full", title: "Fancy Widgets - Docs"},
   {path: "whats-new", component: WhatsNewComponent, pathMatch: "full", title: "Fancy Widgets - What's New"},
-  {path: "whats-new/:widgetId", component: WhatsNewComponent, title: "Fancy Widgets - What's New"},
+  {path: "whats-new/:category", component: WhatsNewComponent, title: "Fancy Widgets - What's New"},
   {path: "support-project", component: SupportProjectComponent, pathMatch: "full", title: "Fancy Widgets - Support Project"},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
