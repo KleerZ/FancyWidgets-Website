@@ -2,7 +2,7 @@ import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core'
 import {WhatsNewService} from "../../common/services/whats-new.service";
 import {WhatsNewModel} from "../../common/models/whatsNewModel";
 import {firstValueFrom} from "rxjs";
-import {HtmlParser} from "@angular/compiler";
+
 import {ActivatedRoute} from "@angular/router";
 import {WidgetService} from "../../common/services/widget.service";
 import {WidgetModel} from "../../common/models/widgetModel";
@@ -13,11 +13,13 @@ import {WidgetModel} from "../../common/models/widgetModel";
   styleUrls: ['./whats-new.component.sass']
 })
 export class WhatsNewComponent implements AfterViewInit {
+  startFromValue: number = 0
+  startToValue: number = 5
 
   isLoaded: boolean = false
   updates: WhatsNewModel[] = []
-  from: number = 0
-  to: number = 5
+  from: number = this.startFromValue
+  to: number = this.startToValue
 
   showWidgetUpdates: boolean = false
   widget: WidgetModel = {id: 0, description: '', name: '', downloadUrl: '', imageUrl: '', version: ''};
@@ -51,13 +53,21 @@ export class WhatsNewComponent implements AfterViewInit {
   }
 
   async onScroll() {
-    if (this.activatedRoute.snapshot.paramMap.get('widgetId')) {
-      return
-    }
-
     this.from = this.to + 1
     this.to += 4
-    let results = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
+    let results: WhatsNewModel[] = []
+
+    switch (this.activatedRoute.snapshot.paramMap.get('category')) {
+      case 'widgets':
+        results = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to, 'widgets'))
+        break;
+      case 'application':
+        results = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to, 'application'))
+        break;
+      case null:
+        results = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to))
+        break;
+    }
     this.updates.push(...results)
   }
 
@@ -68,25 +78,28 @@ export class WhatsNewComponent implements AfterViewInit {
     this.isLoaded = true
   }
 
-  async getGetAllWidgetsUpdates(){
+  async getGetAllWidgetsUpdates() {
+    this.from = this.startFromValue
+    this.to = this.startToValue
     this.checkInputById('vbtn-radio2')
     this.isLoaded = false
     this.showWidgetUpdates = false
-    this.updates = await firstValueFrom(this.whatsNewService.getAllWidgetsUpdates())
+    this.updates = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to, 'widgets'))
     this.isLoaded = true
   }
 
-  async getGetAllApplicationUpdates(){
+  async getGetAllApplicationUpdates() {
+    this.from = this.startFromValue
+    this.to = this.startToValue
     this.checkInputById('vbtn-radio3')
     this.isLoaded = false
     this.showWidgetUpdates = false
-    this.updates = await firstValueFrom(this.whatsNewService.getAllApplicationUpdates())
+    this.updates = await firstValueFrom(this.whatsNewService.getRange(this.from, this.to, 'application'))
     this.isLoaded = true
   }
 
-  checkInputById(id: string){
+  checkInputById(id: string) {
     let input: any = document.getElementById(id)!
-    console.log(input)
     input!.checked = true
   }
 }

@@ -5,12 +5,14 @@ namespace FancyWidgets.Application.CQs.Updates.GetRange;
 
 public class GetUpdatesRangeQuery : IRequest<IEnumerable<WhatsNew>>
 {
-    internal int From { get; set; }
-    internal int To { get; set; }
+    public int From { get; set; }
+    public int To { get; set; }
+    public string? Category { get; set; }
 
-    public GetUpdatesRangeQuery(int from, int to)
+    public GetUpdatesRangeQuery(int from, int to, string? category)
     {
         To = to;
         From = from;
+        Category = category;
     }
 }

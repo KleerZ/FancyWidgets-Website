@@ -16,8 +16,20 @@ public class GetUpdatesRangeQueryHandler : IRequestHandler<GetUpdatesRangeQuery,
 
     public async Task<IEnumerable<WhatsNew>> Handle(GetUpdatesRangeQuery request, CancellationToken cancellationToken)
     {
-        var results = await _supabaseService
-            .FetchDataFromDb<WhatsNew>(table => table.Range(request.From, request.To));
+        var results = request.Category switch
+        {
+            "widgets" => await _supabaseService
+                .FetchDataFromDb<WhatsNew>(table => table
+                    .Where(@new => @new.WidgetId != null)
+                    .Range(request.From, request.To)),
+            "application" => await _supabaseService
+                .FetchDataFromDb<WhatsNew>(table => table
+                    .Where(@new => @new.WidgetId == null)
+                    .Range(request.From, request.To)),
+            _ => await _supabaseService
+                .FetchDataFromDb<WhatsNew>(table => table
+                    .Range(request.From, request.To)),
+        };
 
         return results.OrderByDescending(@new => @new.Date);
     }
