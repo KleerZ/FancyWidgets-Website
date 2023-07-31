@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews()
 builder.Configuration.AddEnvironmentVariables()
     .AddUserSecrets(Assembly.GetExecutingAssembly());
 builder.Configuration
-    .AddJsonFile("/etc/secrets/secrets.json");
+    .AddJsonFile("/etc/secrets/secrets.json", true);
 
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddAutoMapper(config =>
