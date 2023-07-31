@@ -24,7 +24,7 @@ public class Widget : BaseModel
 
     [Postgrest.Attributes.Column(nameof(Version))]
     public string Version { get; set; } = "";
-    
-    [Reference(typeof(WhatsNew))]
+
+    [Reference(typeof(WhatsNew), false)]
     public List<WhatsNew> WhatsNews { get; set; } = new();
 }

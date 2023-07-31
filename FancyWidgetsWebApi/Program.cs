@@ -7,7 +7,7 @@ builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson();
 
 builder.Configuration.AddEnvironmentVariables()
-    .AddUserSecrets(Assembly.GetExecutingAssembly());
+    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 builder.Configuration
     .AddJsonFile("/etc/secrets/secrets.json", true);
 
