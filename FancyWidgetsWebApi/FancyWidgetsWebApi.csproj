@@ -8,10 +8,15 @@
         <SpaProxyServerUrl>https://localhost:44414</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>c1294a09-f9d8-456d-b789-824087e271dd</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.8"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,8 +28,14 @@
 
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <ProjectReference Include="..\FancyWidgets.Application\FancyWidgets.Application.csproj" />
     </ItemGroup>
+
+
+
+
+
+
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
         <!-- Ensure Node.js is installed -->

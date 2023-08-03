@@ -1,9 +1,23 @@
 @import "src/colors"
 
+:host(::ng-deep nav)
+  position: fixed !important
+  background: #070a10 !important
+  height: 55px
+  width: 100%
+  top: 0
+  z-index: 300 !important
+
+:host(::ng-deep .navbar-toggler)
+  @media screen and (min-width: 768px)
+    display: none !important
+    visibility: hidden
+
 .docs-section
   display: flex
   flex-direction: row
-  background: black
+  background: $darker-main-color
+  margin-top: 55px
   min-height: calc(100vh - 55px)
   height: auto
   width: 100%
@@ -16,8 +30,6 @@
     @media screen and (max-width: 768px)
       min-width: auto
 
-  ::ng-deep code
-    color: #3ac9b0
 
   .markdown-page
     padding: 10px 25px 0 25px
@@ -26,19 +38,35 @@
     overflow-y: auto
 
     @media screen and (max-width: 768px)
-      height: calc(100vh - 55px - 40px)
+      height: calc(100vh - 55px)
 
+::ng-deep pre
+  border-radius: 8px
+  background: #1e2634 !important
 
-.sidebar-btn
-  visibility: hidden
+::ng-deep code
+    color: #3ac9b0
 
-  button
-    width: 100%
-    height: 40px
-    position: fixed
-    bottom: 0
-    border-radius: 0
-    z-index: 100
+:host(::ng-deep .highlighted)
+  color: yellow !important
+  font-family: "Inter Bold", serif !important
 
+:host(::ng-deep .form-control)
+  position: relative
+  background: #000000 !important
+  border: 1px solid #2d2d2d
+  color: white !important
+
+:host(::ng-deep .navbar-control)
   @media screen and (max-width: 768px)
-    visibility: visible
+    display: none
+
+:host(::ng-deep .form-control::placeholder)
+  color: gray
+
+#search-btn
+  border-radius: 8px
+  font-family: "Inter Default",serif
+  font-weight: normal
+  height: 40px
+  width: 40px

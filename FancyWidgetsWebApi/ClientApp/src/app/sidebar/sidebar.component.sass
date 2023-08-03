@@ -6,21 +6,23 @@
   flex-direction: column
   width: 300px
   height: calc(100vh - 55px)
-  bottom: -100vh
-  background: $accent-gray
+  left: 0
+  background: $main-color
   padding: 10px
-  transition: 0.3s bottom ease-in-out
+  transition: 0.3s left ease-in-out
 
   @media screen and (max-width: 768px)
     position: fixed
     z-index: 100
     width: 100vw
-    height: auto
+    left: -100vw
+    height: 100%
+    border-top: 1px solid #464646
 
   &.show
     display: flex
-    bottom: 0
-    transition: 0.3s bottom ease-in-out
+    left: 0
+    transition: 0.3s left ease-in-out
 
   .visibility-button
     right: 0
@@ -31,7 +33,7 @@
     width: 100%
     padding-left: 10px
     font-size: 14px
-    color: gray
+    color: $juice-purple-hover
     font-family: "Inter Bold", serif
     letter-spacing: 2px
     margin-bottom: 10px
@@ -47,9 +49,10 @@
     cursor: pointer
 
     &:hover
-      background: $secondary-gray
+      background: $juice-purple
 
 .fancy-sidebar-button
+  cursor: pointer !important
   input[type="radio"]
     display: none
     border-radius: 8px
@@ -66,7 +69,41 @@
     border-radius: 8px
 
   input[type="radio"]:checked + .button-label
-    background: $secondary-gray
+    background: $juice-purple
+
+:host(::ng-deep .articles-div)
+  border-radius: 8px
+  margin-left: 20px
+
+:host(::ng-deep .category-btn)
+  text-align: left !important
+  height: 45px !important
+  border-radius: 8px
+  border: none
+  padding-left: 10px !important
+  padding-right: 10px !important
+  background: transparent
+  color: white
+  transition: background .1s ease-in-out
+  font-family: "Inter Medium", serif
+
+  &:hover
+    background: $darker-main-color
+    transition: background .1s ease-in-out
+
+  &[aria-expanded="true"]
+    background: $darker-main-color
+    .category-title
+      //color: $juice-purple-hover
+    .icon
+      transform: rotate(90deg)
+      transition: .2s all ease-in-out
+
+  &[aria-expanded="false"]
+    .icon
+      transform: rotate(0deg)
+      transition: .2s all ease-in-out
+
 
 
 

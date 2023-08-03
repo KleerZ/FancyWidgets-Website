@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,13 @@ import {SupportPageComponent} from "./support-page/support-page.component";
 import {DownloadButtonComponent} from "./download-button/download-button.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {DocsPageComponent} from "./docs-page/docs-page.component";
+import { SearchComponent } from './search/search.component';
+import {LoaderComponent} from "./loader/loader.component";
+import {WhatsNewComponent} from "./whats-new/whats-new.component";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {WhatsNewBlockComponent} from "./whats-new-block/whats-new-block.component";
+import {CryptoCloudComponent} from "./cryptocloud/cryptocloud.component";
+import {SupportProjectComponent} from "./support-project/support-project.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +37,13 @@ import {DocsPageComponent} from "./docs-page/docs-page.component";
     SupportPageComponent,
     DownloadButtonComponent,
     SidebarComponent,
-    DocsPageComponent
+    DocsPageComponent,
+    SearchComponent,
+    LoaderComponent,
+    WhatsNewComponent,
+    WhatsNewBlockComponent,
+    CryptoCloudComponent,
+    SupportProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +53,11 @@ import {DocsPageComponent} from "./docs-page/docs-page.component";
     AppRoutingModule,
     MarkdownModule.forRoot({
       loader: HttpClient
-    })
+    }),
+    InfiniteScrollModule,
+    ReactiveFormsModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

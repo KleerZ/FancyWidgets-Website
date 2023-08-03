@@ -1,0 +1,73 @@
+@import "src/colors"
+
+.title
+  font-weight: bolder
+  color: white
+  font-family: "Inter Bold", serif
+
+.pay-div
+  border-radius: 8px
+  padding: 20px
+  width: 400px
+  background: $secondary-main-color
+
+  @media screen and (max-width: 768px)
+    width: 100%
+
+  input
+    border-radius: 8px
+    border: none
+    outline: none
+    height: 40px
+    background: $darker-main-color
+    padding: 10px
+    color: white
+
+:host(::ng-deep .alert-danger)
+  display: flex
+  align-items: center
+  height: 30px !important
+  color: white
+  border: none
+  background: #dc3545
+
+.real-pay-btn
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 45px
+  background: $juice-purple !important
+  transition: .1s all linear
+  cursor: pointer
+
+  &:hover
+    background: black !important
+    transition: .1s all linear
+
+  &:disabled
+    background: #352591 !important
+    cursor: default
+
+.amount-div
+  width: 100%
+  height: fit-content
+  position: relative
+
+  input
+    padding-right: 35px !important
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+  input[type=number]
+    -moz-appearance: textfield
+
+  .dollar-icon
+    position: absolute
+    color: white
+    height: 100%
+    right: 10px
+
+

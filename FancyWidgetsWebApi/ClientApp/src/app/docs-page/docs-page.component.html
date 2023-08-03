@@ -1,31 +1,46 @@
-<section class="docs-section">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+     <a class="navbar-brand fw-bold text-white" [routerLink]="['/']">Fancy Widgets</a>
+
+    <button type="button" class="bg-transparent border-0 w-auto d-flex flex-row m-0 p-0" data-bs-toggle="modal" data-bs-target="#searchModal">
+      <button class="btn fancy-button" type="button" id="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+    </button>
+
+  </div>
+</nav>
+
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered d-flex justify-content-center align-items-center">
+    <div class="modal-content bg-transparent">
+      <app-search [searchData]="docsArticles"/>
+    </div>
+  </div>
+</div>
+
+<section id="docs-section" class="docs-section">
   <div class="sidebar-container">
-    <app-sidebar [ngClass]="{'show': showSidebar}"
+    <app-sidebar #sidebarComponent
+                 [ngClass]="{'show': showSidebar}"
+                 [isLoaded]="isLoaded"
+                 [categories]="categories"
+                 [docsArticles]="docsArticles"
                  [showSidebar]="showSidebar"/>
   </div>
 
-  <div #markdown class="markdown-page">
-    <markdown [data]="markdownText"/>
+  <div class="markdown-page">
+    <markdown (ready)="highlightFoundedText()"
+              [disableSanitizer]="true"
+              #markdown
+              [data]="markdownText"/>
   </div>
-
 </section>
-
-<div class="sidebar-btn w-100 d-flex justify-content-end">
-  <button (click)="toggleSidebar()" class="visibility-button btn fancy-button">
-    <svg *ngIf="!showSidebar" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-         class="bi bi-caret-up-fill" viewBox="0 0 16 16">
-      <path
-        d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-    </svg>
-
-    <svg *ngIf="showSidebar" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-         class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-      <path
-        d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-    </svg>
-  </button>
-</div>
-
 
 
 

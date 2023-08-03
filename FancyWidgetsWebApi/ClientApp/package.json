@@ -30,6 +30,7 @@
     "jquery": "^3.6.3",
     "marked": "^4.3.0",
     "md": "^0.6.0",
+    "ngx-infinite-scroll": "^16.0.0",
     "ngx-markdown": "^16.0.0",
     "oidc-client": "^1.11.5",
     "popper.js": "^1.16.0",

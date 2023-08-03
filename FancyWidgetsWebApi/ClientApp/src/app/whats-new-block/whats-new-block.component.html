@@ -1,0 +1,11 @@
+<div class="update-div col-12 col-sm-12 col-xl-9 mb-3">
+  <div class="update-info d-flex flex-row justify-content-between">
+    <div class="update-title fs-4">{{title}}
+      <span class="update-version fs-6">(v{{version}})</span>
+    </div>
+    <div class="update-date">{{date | date:'dd.MM.YYYY':'UTC'}}</div>
+  </div>
+  <div class="mt-2 update-text">
+    <markdown [data]="text"></markdown>
+  </div>
+</div>

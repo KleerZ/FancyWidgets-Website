@@ -1,0 +1,25 @@
+@import "src/colors"
+
+.whats-new
+  min-height: calc(100vh - 55px - 55px)
+  padding: 10px 0 20px 0
+  color: white
+
+:host(::ng-deep .category-btn-group)
+  padding: 5px
+  border: 2px solid $darker-main-color
+  background: $darker-main-color
+  border-radius: 8px
+  color: $juice-purple-hover
+
+  label
+    color: white
+    border: none
+
+    &:hover
+      background: $juice-purple
+      color: white
+
+  .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active
+    background: $juice-purple
+

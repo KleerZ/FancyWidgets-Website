@@ -1,34 +1,37 @@
 @import "src/colors"
+@import "src/styles"
 
 nav
-  background: black !important
+  background: #0a0e17 !important
   height: 55px
   width: 100%
   top: 0
   z-index: 300 !important
 
-  .fancy-link
+  .nav-container
+    background: $darker-main-color
     position: relative
-    color: #BEBEBE
 
-    &:hover
-      color: white
+    .fancy-link
+      position: relative
+      font-family: "Inter SemiBold", serif
+      color: #ffffff
 
-    &::before
-      content: ""
-      position: absolute
-      width: 100%
-      height: 2px
-      bottom: 0
-      left: 0
-      background-color: white
-      visibility: hidden
-      transform: scaleX(0)
-      transition: all 0.3s ease-in-out
+      &:hover
+        color: $light-grey
 
-    &:hover::before
-      visibility: visible
-      transform: scaleX(1)
+    .support-project-button
+      @extend .fancy-button
+      border: 2px solid $juice-purple-hover
+      height: 40px
+      padding: 8px
+      border-radius: 8px
+      background: black
+
+      &:hover
+        background: $juice-purple-hover
+        color: white
+
 
 
 

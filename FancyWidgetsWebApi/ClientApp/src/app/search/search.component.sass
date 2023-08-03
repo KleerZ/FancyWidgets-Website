@@ -1,0 +1,74 @@
+@import "src/colors"
+
+.search-container
+  background: #131a2c !important
+  padding: 10px
+  border-radius: 12px !important
+
+  .no-results
+    color: $light-grey
+    font-size: 15px
+    padding: 10px 10px 0 10px
+
+  .results
+    margin-top: 10px
+    height: auto
+    max-height: 400px !important
+    overflow-y: auto !important
+    overflow-x: hidden
+
+    .search-result
+      display: flex
+      flex-direction: column
+      justify-content: center
+      border-radius: 12px
+      width: 100%
+      height: auto
+      padding: 10px !important
+      background: $darker-main-color
+
+      &:hover
+        background: $secondary-main-color
+        cursor: pointer
+
+      .title
+        color: $light-grey
+        font-size: 13px
+        margin: 0
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
+      .text
+        color: white !important
+        font-family: "Inter Medium", serif
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
+  @media screen and (max-width: 768px)
+    width: 100%
+
+:host(::ng-deep p)
+  color: white !important
+  border-radius: 12px !important
+  width: 100% !important
+  transition: .2s all ease-in-out !important
+  cursor: pointer !important
+
+#cancel-btn
+  border-radius: 8px
+  font-family: "Inter Default",serif
+  font-weight: normal
+
+#button-addon2
+  @extend #cancel-btn
+  height: 40px
+  width: 40px
+
+#clear-btn
+  @extend #cancel-btn
+  background: #b71a1a
+
+
+

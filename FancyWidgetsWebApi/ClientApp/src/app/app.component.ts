@@ -12,6 +12,7 @@ import HTML = marked.Tokens.HTML;
 export class AppComponent implements AfterContentInit{
   title = 'fancy-widgets';
   public showFooter: boolean = true;
+  public showNavbar: boolean = true;
   navbarElement!: any
 
   @ViewChild('navBarComponent') navbar!: HTMLDivElement
@@ -22,31 +23,14 @@ export class AppComponent implements AfterContentInit{
     @Inject(DOCUMENT) private document: Document
   ) {
     this.handleRouteEvents();
-    this.setFooterVisibility();
-    this.setNavbarPosition();
+    this.setFooterAndNavbarVisibility();
   }
 
-  setFooterVisibility() {
+  setFooterAndNavbarVisibility() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.showFooter = !event.url.includes('/docs');
-      }
-    });
-  }
-
-  setNavbarPosition() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        if (event.url.includes('/docs')) {
-          this.navbarElement.style.setProperty('top', '0')
-          this.navbarElement.style.setProperty('position', 'sticky')
-          this.navbarElement.style.setProperty('width', '100%')
-          this.navbarElement.style.setProperty('z-index', '200')
-        }
-        else {
-          this.navbarElement.style.setProperty('top', '0')
-          this.navbarElement.style.setProperty('position', 'relative')
-        }
+        this.showNavbar = !event.url.includes('/docs');
       }
     });
   }
