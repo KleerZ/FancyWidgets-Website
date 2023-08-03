@@ -12,5 +12,12 @@ public class GetAllWidgetsQueryHandler : IRequestHandler<GetAllWidgetsQuery, IEn
         _supabaseService = supabaseService;
 
     public async Task<IEnumerable<Widget>> Handle(GetAllWidgetsQuery request,
-        CancellationToken cancellationToken) => await _supabaseService.FetchDataFromDb<Widget>();
+        CancellationToken cancellationToken)
+    {
+        var result = await _supabaseService.FetchDataFromDb<Widget>();
+        var widgets = result.GroupBy(w => w.Name)
+            .Select(g => g.OrderByDescending(w => new Version(w.Version)).First());
+
+        return widgets;
+    }
 }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Postgrest.Attributes;
+﻿using Postgrest.Attributes;
 using Postgrest.Models;
 
 namespace FancyWidgets.Domain;
